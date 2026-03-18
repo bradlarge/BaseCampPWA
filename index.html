@@ -247,6 +247,12 @@
     }
 
     loadLesson(0);
+
+      if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+      .then(() => console.log("Trail Map Loaded (Service Worker Registered)"))
+      .catch(err => console.log("Service Worker Failed", err));
+}
   </script>
 </body>
 
