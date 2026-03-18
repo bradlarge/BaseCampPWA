@@ -6,25 +6,38 @@
     <title>Basecamp Kids</title>
     <link rel="manifest" href="manifest.json">
     <style>
-        :root { --primary: #2c5f2d; --secondary: #ff7f50; --accent: #6b5b95; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f7ff; color: #333; margin: 0; padding: 0; text-align: center; }
+        :root { --primary: #2c5f2d; --secondary: #ff7f50; --accent: #6b5b95; --bg: #f0f7ff; }
+        
+        body { font-family: 'Segoe UI', Roboto, sans-serif; background-color: var(--bg); color: #333; margin: 0; padding: 0; text-align: center; }
         
         /* Navigation Menu */
-        #nav-menu { position: fixed; top: 0; left: -100%; width: 250px; height: 100%; background: white; box-shadow: 2px 0 10px rgba(0,0,0,0.2); transition: 0.3s; z-index: 1000; padding-top: 60px; text-align: left; }
-        #nav-menu a { display: block; padding: 15px 25px; text-decoration: none; color: #333; border-bottom: 1px solid #eee; }
+        #nav-menu { position: fixed; top: 0; left: -100%; width: 280px; height: 100%; background: white; box-shadow: 2px 0 10px rgba(0,0,0,0.2); transition: 0.3s; z-index: 1000; padding-top: 60px; text-align: left; }
+        #nav-menu a { display: block; padding: 15px 25px; text-decoration: none; color: #333; border-bottom: 1px solid #eee; font-weight: 500; }
         #nav-menu.active { left: 0; }
-        .menu-btn { position: fixed; top: 15px; left: 15px; background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; z-index: 1001; font-weight: bold; }
+        .menu-btn { position: fixed; top: 15px; left: 15px; background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 8px; cursor: pointer; z-index: 1001; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
-        .header-container { width: 100%; overflow: hidden; background: var(--primary); }
+        /* Header */
+        .header-container { width: 100%; overflow: hidden; background: var(--primary); line-height: 0; }
         .header-img { width: 100%; height: auto; max-width: 1080px; display: block; margin: 0 auto; }
+
         .content { padding: 20px; max-width: 600px; margin: 0 auto; }
         
-        .card { background: white; border-radius: 20px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 25px; }
-        .btn { display: inline-block; background: var(--secondary); color: white; padding: 15px 25px; text-decoration: none; border-radius: 30px; font-weight: bold; margin: 10px; border: none; cursor: pointer; }
-        
-        .nav-controls { display: flex; justify-content: space-between; margin-top: 20px; }
-        iframe { border: 0; border-radius: 15px; width: 100%; height: 500px; }
-        .hidden { display: none; }
+        .card { background: white; border-radius: 20px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 25px; border: 1px solid #eef2f5; }
+        h1 { color: var(--primary); margin: 15px 0; font-size: 1.6rem; }
+        h3 { margin-top: 0; color: #555; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        .btn { display: inline-block; background: var(--secondary); color: white; padding: 14px 24px; text-decoration: none; border-radius: 30px; font-weight: bold; margin: 10px; border: none; cursor: pointer; transition: transform 0.2s; }
+        .btn:active { transform: scale(0.95); }
+
+        /* Bible Section */
+        #bible-text { text-align: left; max-height: 300px; overflow-y: auto; padding: 15px; font-size: 1.1rem; line-height: 1.7; background: #f9f9f9; border-radius: 10px; border: 1px inset #eee; margin-top: 10px; }
+        #bible-reference { font-weight: bold; color: var(--accent); margin-bottom: 5px; display: block; }
+
+        /* Quizlet */
+        .quizlet-frame { border: 0; border-radius: 15px; width: 100%; height: 500px; }
+
+        .nav-controls { display: flex; justify-content: space-between; margin: 20px 0 40px 0; }
+        .hidden { visibility: hidden; }
     </style>
 </head>
 <body>
@@ -32,89 +45,33 @@
     <button class="menu-btn" onclick="toggleMenu()">☰ MENU</button>
 
     <nav id="nav-menu">
-        <h3 style="padding-left: 25px;">All Lessons</h3>
+        <h3 style="padding-left: 25px; color: var(--primary);">Basecamp Lessons</h3>
         <a href="#" onclick="loadLesson(0)">Week 1: Adventure Begins</a>
-        <a href="#" onclick="loadLesson(1)">Week 2: The Journey</a>
-        <a href="#" onclick="loadLesson(2)">Week 3: The Mountain</a>
-    </nav>
+        <a href="#" onclick="loadLesson(1)">Week 2: Into the Woods</a>
+        </nav>
 
     <div class="header-container">
         <img src="images/header.png" alt="Basecamp" class="header-img">
     </div>
 
     <div class="content">
-        <h1 id="lesson-title">Week 1</h1>
+        <h1 id="lesson-title">Loading...</h1>
 
         <div class="card">
-            <h3>📺 Video & Bible</h3>
-            <a id="video-link" href="#" class="btn" target="_blank">Watch Video</a>
-            <a id="bible-link" href="#" class="btn" style="background: var(--accent);" target="_blank">Read Bible</a>
+            <h3>📖 Bible Reading</h3>
+            <span id="bible-reference"></span>
+            <div id="bible-text">Loading scripture...</div>
         </div>
 
         <div class="card">
-            <h3 id="game-title">Match Game</h3>
-            <div id="quizlet-container">
-                </div>
+            <h3>📺 Video Lesson</h3>
+            <a id="video-link" href="#" class="btn" target="_blank">Watch Now</a>
+        </div>
+
+        <div class="card">
+            <h3>🧠 Game Challenge</h3>
+            <div id="quizlet-container"></div>
         </div>
 
         <div class="nav-controls">
-            <button class="btn" id="prev-btn" onclick="prevLesson()" style="background: #999;">← Previous</button>
-            <button class="btn" id="next-btn" onclick="nextLesson()">Next →</button>
-        </div>
-    </div>
-
-    <script>
-    // 1. YOUR UPDATED LESSON DATA
-    const lessons = [
-        {
-            title: "Week 1: Adventure Begins",
-            video: "YOUR_YOUTUBE_LINK_HERE", 
-            bible: "YOUR_BIBLE_LINK_HERE",
-            // Updated to your Flashcards link
-            quizlet: "https://quizlet.com/1156634382/flashcards/embed?i=72vrag&x=1jj1"
-        },
-        {
-            title: "Week 2: Into the Woods",
-            video: "YOUR_YOUTUBE_LINK_HERE",
-            bible: "YOUR_BIBLE_LINK_HERE",
-            quizlet: "https://quizlet.com/YOUR_NEXT_SET_ID/flashcards/embed"
-        }
-    ];
-
-    let currentIdx = 0;
-
-    function loadLesson(index) {
-        const lesson = lessons[index];
-        
-        // Update Text and Links
-        document.getElementById('lesson-title').innerText = lesson.title;
-        document.getElementById('video-link').href = lesson.video;
-        document.getElementById('bible-link').href = lesson.bible;
-        
-        // Update Quizlet Iframe
-        const container = document.getElementById('quizlet-container');
-        container.innerHTML = `<iframe src="${lesson.quizlet}" height="500" width="100%" style="border:0" allowfullscreen></iframe>`;
-        
-        // Update Navigation State
-        currentIdx = index;
-        document.getElementById('prev-btn').style.visibility = (index === 0) ? 'hidden' : 'visible';
-        document.getElementById('next-btn').style.visibility = (index === lessons.length - 1) ? 'hidden' : 'visible';
-        
-        toggleMenu(false); // Close menu after selection
-        window.scrollTo(0,0); // Scroll to top for new lesson
-    }
-
-    function nextLesson() { if(currentIdx < lessons.length - 1) loadLesson(currentIdx + 1); }
-    function prevLesson() { if(currentIdx > 0) loadLesson(currentIdx - 1); }
-    
-    function toggleMenu(forceClose) {
-        const menu = document.getElementById('nav-menu');
-        if (forceClose === false) menu.classList.remove('active');
-        else menu.classList.toggle('active');
-    }
-
-    // Start the app on the first lesson
-    loadLesson(0);
-</script>
-</body>
-</html>
+            <button class="btn" id="prev-btn" onclick="prevLesson()" style="background:
