@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Basecamp: Ancient Paths</title>
   <link rel="manifest" href="manifest.json">
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Alfa+Slab+One&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Alfa+Slab+One&family=Montserrat:wght@400;700&display=swap"
+    rel="stylesheet">
 
   <style>
     :root {
@@ -15,7 +18,8 @@
       --neutral: #4A4A4A;
       --bg: #F9F7F2;
       --white: #FFFFFF;
-      --header-height: 80px; 
+      /* CROPPED HEIGHT: Reduced from 80px to 40px */
+      --header-height: 40px;
     }
 
     body {
@@ -39,32 +43,39 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       z-index: 900;
       overflow: hidden;
     }
 
     .header-img {
       width: 100%;
+      /* Forces width to screen edges */
       height: 100%;
-      object-fit: contain;
+      /* Forces height to the new 40px limit */
+      object-fit: cover;
+      /* CROPS the image to fill the space without gaps */
+      object-position: top;
+      /* Ensures the middle of your logo stays visible */
       display: block;
     }
 
     .menu-btn {
       position: fixed;
-      top: 22px; 
-      left: 15px;
+      top: 5px;
+      /* Moved up to center within the 40px height */
+      left: 10px;
       background: var(--primary);
       color: var(--accent);
-      border: 2px solid var(--accent);
-      padding: 10px 15px;
-      border-radius: 6px;
+      border: 1px solid var(--accent);
+      padding: 4px 10px;
+      /* Slimmer padding for a smaller header */
+      border-radius: 4px;
       cursor: pointer;
       z-index: 1001;
       font-family: 'Archivo Black', sans-serif;
-      font-size: 0.8rem;
-      box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
+      font-size: 0.7rem;
+      /* Slightly smaller text */
     }
 
     /* NAVIGATION MENU - REVISED FOR STABILITY */
@@ -74,7 +85,8 @@
       left: -100%;
       width: 85%;
       max-width: 320px;
-      height: 100dvh; /* Dynamic height for mobile */
+      height: 100dvh;
+      /* Dynamic height for mobile */
       background: var(--primary);
       z-index: 1000;
       transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -83,7 +95,9 @@
       box-shadow: 10px 0 20px rgba(0, 0, 0, 0.4);
     }
 
-    #nav-menu.active { left: 0; }
+    #nav-menu.active {
+      left: 0;
+    }
 
     .nav-container {
       flex: 1;
@@ -124,13 +138,15 @@
     /* VIEW LAYOUT */
     .view {
       display: none;
-      padding: 20px 15px 120px 15px; 
+      padding: 20px 15px 120px 15px;
       max-width: 800px;
       margin: var(--header-height) auto 0 auto;
       text-align: center;
     }
 
-    .view.active { display: block; }
+    .view.active {
+      display: block;
+    }
 
     .card {
       background: var(--white);
@@ -141,19 +157,99 @@
       box-shadow: 0 4px 0px rgba(0, 0, 0, 0.05);
     }
 
-    h1 { font-family: 'Archivo Black', sans-serif; font-size: 1.6rem; color: var(--primary); margin: 15px 0; }
-    h2 { font-family: 'Alfa Slab One', cursive; color: var(--secondary); font-size: 1.2rem; margin-bottom: 10px; }
-    h3 { font-family: 'Alfa Slab One', cursive; color: var(--secondary); font-size: 0.85rem; text-transform: uppercase; margin-bottom: 15px; }
+    h1 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 1.6rem;
+      color: var(--primary);
+      margin: 15px 0;
+    }
 
-    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; border: 4px solid var(--primary); background: #000; margin-bottom: 10px; }
-    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-    
-    .checklist { text-align: left; list-style: none; padding: 0; }
-    .checklist li { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #F0EFEA; font-weight: 700; color: var(--primary); }
-    .checklist input { width: 26px; height: 26px; margin-right: 15px; accent-color: var(--secondary); }
+    h2 {
+      font-family: 'Alfa Slab One', cursive;
+      color: var(--secondary);
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
 
-    .activity-btn { display: flex; align-items: center; justify-content: center; background: var(--bg); border: 2px solid var(--primary); color: var(--primary); text-decoration: none; padding: 16px; margin: 10px 0; border-radius: 8px; font-family: 'Archivo Black', sans-serif; font-size: 0.85rem; box-shadow: 0 4px 0 var(--primary); }
-    .btn { background: var(--secondary); color: var(--bg); padding: 14px 24px; border-radius: 4px; font-family: 'Archivo Black', sans-serif; text-transform: uppercase; border: none; cursor: pointer; box-shadow: 0 4px 0 #8A452A; text-decoration: none; display: inline-block; }
+    h3 {
+      font-family: 'Alfa Slab One', cursive;
+      color: var(--secondary);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 8px;
+      border: 4px solid var(--primary);
+      background: #000;
+      margin-bottom: 10px;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .checklist {
+      text-align: left;
+      list-style: none;
+      padding: 0;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #F0EFEA;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .checklist input {
+      width: 26px;
+      height: 26px;
+      margin-right: 15px;
+      accent-color: var(--secondary);
+    }
+
+    .activity-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      text-decoration: none;
+      padding: 16px;
+      margin: 10px 0;
+      border-radius: 8px;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 0.85rem;
+      box-shadow: 0 4px 0 var(--primary);
+    }
+
+    .btn {
+      background: var(--secondary);
+      color: var(--bg);
+      padding: 14px 24px;
+      border-radius: 4px;
+      font-family: 'Archivo Black', sans-serif;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 0 #8A452A;
+      text-decoration: none;
+      display: inline-block;
+    }
 
     .sticky-nav {
       position: fixed;
@@ -169,14 +265,79 @@
       z-index: 950;
     }
 
-    .nav-btn { flex: 1; margin: 0 5px; font-size: 0.8rem; }
+    .nav-btn {
+      flex: 1;
+      margin: 0 5px;
+      font-size: 0.8rem;
+    }
 
-    .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(45, 71, 57, 0.9); }
-    .modal-content { background: var(--bg); margin: 10% auto; padding: 25px; width: 90%; max-width: 500px; border: 4px solid var(--primary); border-radius: 8px; max-height: 75vh; overflow-y: auto; }
-    #toast { visibility: hidden; min-width: 200px; background-color: var(--primary); color: var(--accent); text-align: center; padding: 15px; position: fixed; z-index: 3000; bottom: 100px; left: 50%; transform: translateX(-50%); font-family: 'Archivo Black', sans-serif; border-radius: 6px; }
-    #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
-    @keyframes fadein { from { bottom: 0; opacity: 0; } to { bottom: 100px; opacity: 1; } }
-    @keyframes fadeout { from { bottom: 100px; opacity: 1; } to { bottom: 0; opacity: 0; } }
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(45, 71, 57, 0.9);
+    }
+
+    .modal-content {
+      background: var(--bg);
+      margin: 10% auto;
+      padding: 25px;
+      width: 90%;
+      max-width: 500px;
+      border: 4px solid var(--primary);
+      border-radius: 8px;
+      max-height: 75vh;
+      overflow-y: auto;
+    }
+
+    #toast {
+      visibility: hidden;
+      min-width: 200px;
+      background-color: var(--primary);
+      color: var(--accent);
+      text-align: center;
+      padding: 15px;
+      position: fixed;
+      z-index: 3000;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Archivo Black', sans-serif;
+      border-radius: 6px;
+    }
+
+    #toast.show {
+      visibility: visible;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    @keyframes fadein {
+      from {
+        bottom: 0;
+        opacity: 0;
+      }
+
+      to {
+        bottom: 100px;
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeout {
+      from {
+        bottom: 100px;
+        opacity: 1;
+      }
+
+      to {
+        bottom: 0;
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 
@@ -194,7 +355,7 @@
       <div class="nav-section">Basecamp HQ</div>
       <a href="#" onclick="showView('home')">🏠 Home Base</a>
       <a href="#" onclick="showView('reference')">📜 Creeds & Prayers</a>
-      
+
       <div class="nav-section">The Waypoints</div>
       <a href="#" onclick="loadLesson(0)">Waypoint 1: Trailhead</a>
       <a href="#" onclick="loadLesson(1)">Waypoint 2: Ranger Station</a>
@@ -212,7 +373,7 @@
       <a href="#" onclick="loadLesson(13)">Waypoint 14: Resupply</a>
       <a href="#" onclick="loadLesson(14)">Waypoint 15: Signs and Provision</a>
       <a href="#" onclick="loadLesson(15)">Waypoint 16: Homeward Bound</a>
-      
+
       <div class="menu-footer-buffer"></div>
     </div>
   </nav>
@@ -230,7 +391,8 @@
     <h1>Reference Room</h1>
     <div class="card">
       <h2>The Apostle's Creed</h2>
-      <div style="text-align:left; line-height:1.8; font-family:Georgia, serif; font-size:1.1rem; white-space: pre-line;">
+      <div
+        style="text-align:left; line-height:1.8; font-family:Georgia, serif; font-size:1.1rem; white-space: pre-line;">
         I believe in God, the Father almighty, creator of heaven and earth.
         I believe in Jesus Christ, his only Son, our Lord...
       </div>
@@ -240,7 +402,7 @@
 
   <div id="view-lesson" class="view">
     <h1 id="lesson-title">Loading...</h1>
-    
+
     <div class="card">
       <h3>📹 Field Briefing</h3>
       <div class="video-container">
@@ -267,16 +429,21 @@
     <div class="card">
       <h3>🎒 Training Activities</h3>
       <a id="link-flashcards" href="#" target="_blank" class="activity-btn">📝 Open Flashcards</a>
-      <a id="link-match" href="#" target="_blank" class="activity-btn" style="border-color: var(--secondary); color: var(--secondary); box-shadow: 0 4px 0 var(--secondary);">🎮 Launch Match Game</a>
+      <a id="link-match" href="#" target="_blank" class="activity-btn"
+        style="border-color: var(--secondary); color: var(--secondary); box-shadow: 0 4px 0 var(--secondary);">🎮 Launch
+        Match Game</a>
     </div>
 
     <div class="card" style="background: #EEEADF;">
       <h3>📓 Leader's Log</h3>
-      <textarea id="leaders-log" style="width:100%; height:120px; border:2px solid #CCC; padding:10px; border-radius:6px; font-family: inherit;" placeholder="Record observations..." oninput="saveProgress(false)"></textarea>
+      <textarea id="leaders-log"
+        style="width:100%; height:120px; border:2px solid #CCC; padding:10px; border-radius:6px; font-family: inherit;"
+        placeholder="Record observations..." oninput="saveProgress(false)"></textarea>
     </div>
 
     <div class="sticky-nav">
-      <button class="btn nav-btn" id="prev-btn" onclick="prevLesson()" style="background: var(--neutral);">⬅ BACK</button>
+      <button class="btn nav-btn" id="prev-btn" onclick="prevLesson()" style="background: var(--neutral);">⬅
+        BACK</button>
       <button class="btn nav-btn" id="next-btn" onclick="nextLesson()">NEXT ➡</button>
     </div>
   </div>
@@ -379,4 +546,5 @@
     window.onload = () => { showView('home'); };
   </script>
 </body>
+
 </html>
