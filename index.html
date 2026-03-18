@@ -85,17 +85,35 @@
 
         function loadLesson(index) {
             const lesson = lessons[index];
+            currentIdx = index;
+
+            // Update Text UI
             document.getElementById('lesson-title').innerText = lesson.title;
             document.getElementById('video-link').href = lesson.video;
-            document.getElementById('bible-link').href = lesson.bible;
-            document.getElementById('quizlet-container').innerHTML = `<iframe src="${lesson.quizlet}"></iframe>`;
             
-            // UI updates
-            currentIdx = index;
-            document.getElementById('prev-btn').classList.toggle('hidden', index === 0);
-            document.getElementById('next-btn').classList.toggle('hidden', index === lessons.length - 1);
+            // Trigger Bible Fetch
+            fetchBibleText(lesson.bibleRef);
+            
+            // FIX: Clear the container first, then rebuild the iframe
+            const quizContainer = document.getElementById('quizlet-container');
+            quizContainer.innerHTML = ''; // Clear old game
+            
+            const newIframe = document.createElement('iframe');
+            newIframe.src = lesson.quizlet;
+            newIframe.className = "quizlet-frame";
+            newIframe.setAttribute('allowfullscreen', '');
+            newIframe.setAttribute('height', '500');
+            newIframe.setAttribute('width', '100%');
+            newIframe.style.border = "0";
+            
+            quizContainer.appendChild(newIframe);
+            
+            // Handle Button Visibility
+            document.getElementById('prev-btn').style.visibility = (index === 0) ? 'hidden' : 'visible';
+            document.getElementById('next-btn').style.visibility = (index === lessons.length - 1) ? 'hidden' : 'visible';
+            
             toggleMenu(false);
-            window.scrollTo(0,0);
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
         function nextLesson() { if(currentIdx < lessons.length - 1) loadLesson(currentIdx + 1); }
