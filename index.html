@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Basecamp: Ancient Paths</title>
   <link rel="manifest" href="manifest.json">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Alfa+Slab+One&family=Montserrat:wght@400;700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Alfa+Slab+One&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -30,7 +27,6 @@
       overflow-x: hidden;
     }
 
-    /* Navigation */
     /* Navigation - Mobile Optimized */
     .menu-btn {
       position: fixed;
@@ -47,7 +43,6 @@
       font-size: 0.8rem;
       box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
       touch-action: manipulation;
-      /* Removes double-tap delay */
     }
 
     #nav-menu {
@@ -55,53 +50,43 @@
       top: 0;
       left: -100%;
       width: 85%;
-      /* Wider for easier reach */
       max-width: 320px;
-      height: 100%;
+      height: 100dvh; /* Dynamic height for mobile browsers */
       background: var(--primary);
       z-index: 1000;
       transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      padding-top: 80px;
+      padding-top: 60px;
       text-align: left;
       box-shadow: 10px 0 20px rgba(0, 0, 0, 0.4);
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
-      /* Smooth momentum scrolling on iOS */
     }
 
     #nav-menu.active {
       left: 0;
     }
 
-    #nav-menu { 
-    position: fixed; 
-    top: 0; 
-    left: -100%; 
-    width: 85%; 
-    max-width: 320px; 
-    height: 100dvh; /* Dynamic height to account for mobile browser bars */
-    background: var(--primary); 
-    z-index: 1000; 
-    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-    padding-top: 60px; /* Space for the toggle button */
-    text-align: left; 
-    box-shadow: 10px 0 20px rgba(0,0,0,0.4); 
-    overflow-y: auto; 
-    -webkit-overflow-scrolling: touch;
-}
+    .nav-container {
+      padding-bottom: 80px; /* Bumper to keep last items visible */
+    }
 
-/* Add this wrapper inside your <nav> in the HTML to create a "bumper" at the bottom */
-.nav-container {
-    padding-bottom: 100px; /* This prevents the last waypoints from being hidden */
-}
+    #nav-menu a {
+      display: block;
+      padding: 18px 25px;
+      color: var(--bg);
+      text-decoration: none;
+      font-weight: 700;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 1rem;
+      transition: background 0.2s;
+      touch-action: manipulation;
+    }
 
-    /* Visual feedback when the thumb presses down */
     #nav-menu a:active {
       background: rgba(255, 255, 255, 0.1);
       color: var(--accent);
     }
 
-    /* Highlight for the active lesson */
     #nav-menu a.current-waypoint {
       background: var(--secondary);
       color: white;
@@ -165,7 +150,6 @@
       margin-bottom: 15px;
     }
 
-    /* Video Wrapper */
     .video-container {
       position: relative;
       padding-bottom: 56.25%;
@@ -187,7 +171,6 @@
       border: none;
     }
 
-    /* Checklist */
     .checklist {
       text-align: left;
       list-style: none;
@@ -244,7 +227,6 @@
       text-decoration: none;
     }
 
-    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -292,29 +274,8 @@
       animation: fadein 0.5s, fadeout 0.5s 2.5s;
     }
 
-    @keyframes fadein {
-      from {
-        bottom: 0;
-        opacity: 0;
-      }
-
-      to {
-        bottom: 30px;
-        opacity: 1;
-      }
-    }
-
-    @keyframes fadeout {
-      from {
-        bottom: 30px;
-        opacity: 1;
-      }
-
-      to {
-        bottom: 0;
-        opacity: 0;
-      }
-    }
+    @keyframes fadein { from { bottom: 0; opacity: 0; } to { bottom: 30px; opacity: 1; } }
+    @keyframes fadeout { from { bottom: 30px; opacity: 1; } to { bottom: 0; opacity: 0; } }
   </style>
 </head>
 
@@ -325,31 +286,31 @@
 
   <nav id="nav-menu">
     <div class="nav-container">
-        <div class="nav-section">Basecamp HQ</div>
-        <a href="#" onclick="showView('home')">🏠 Home Base</a>
-        <a href="#" onclick="showView('reference')">📜 Creeds & Prayers</a>
-        
-        <div class="nav-section">The Waypoints</div>
-        <a href="#" onclick="loadLesson(0)">Waypoint 1: Trailhead</a>
-        <a href="#" onclick="loadLesson(1)">Waypoint 2: Ranger Station</a>
-        <a href="#" onclick="loadLesson(2)">Waypoint 3: Mountain Overlook</a>
-        <a href="#" onclick="loadLesson(3)">Waypoint 4: High Stakes Path</a>
-        <a href="#" onclick="loadLesson(4)">Waypoint 5: Weathering Storms</a>
-        <a href="#" onclick="loadLesson(5)">Waypoint 6: Finding Shelter</a>
-        <a href="#" onclick="loadLesson(6)">Waypoint 7: The Safety Line</a>
-        <a href="#" onclick="loadLesson(7)">Waypoint 8: The Right Gear</a>
-        <a href="#" onclick="loadLesson(8)">Waypoint 9: Perfect Guide</a>
-        <a href="#" onclick="loadLesson(9)">Waypoint 10: The Ranger's Handbook</a>
-        <a href="#" onclick="loadLesson(10)">Waypoint 11: True North</a>
-        <a href="#" onclick="loadLesson(11)">Waypoint 12: The Trail Code</a>
-        <a href="#" onclick="loadLesson(12)">Waypoint 13: Comm Check</a>
-        <a href="#" onclick="loadLesson(13)">Waypoint 14: Resupply</a>
-        <a href="#" onclick="loadLesson(14)">Waypoint 15: Signs and Provision</a>
-        <a href="#" onclick="loadLesson(15)">Waypoint 16: Homeward Bound</a>
-        
-        <div style="height: 60px;"></div> 
+      <div class="nav-section">Basecamp HQ</div>
+      <a href="#" onclick="showView('home')">🏠 Home Base</a>
+      <a href="#" onclick="showView('reference')">📜 Creeds & Prayers</a>
+      
+      <div class="nav-section">The Waypoints</div>
+      <a href="#" onclick="loadLesson(0)">Waypoint 1: Trailhead</a>
+      <a href="#" onclick="loadLesson(1)">Waypoint 2: Ranger Station</a>
+      <a href="#" onclick="loadLesson(2)">Waypoint 3: Mountain Overlook</a>
+      <a href="#" onclick="loadLesson(3)">Waypoint 4: High Stakes Path</a>
+      <a href="#" onclick="loadLesson(4)">Waypoint 5: Weathering Storms</a>
+      <a href="#" onclick="loadLesson(5)">Waypoint 6: Finding Shelter</a>
+      <a href="#" onclick="loadLesson(6)">Waypoint 7: The Safety Line</a>
+      <a href="#" onclick="loadLesson(7)">Waypoint 8: The Right Gear</a>
+      <a href="#" onclick="loadLesson(8)">Waypoint 9: Perfect Guide</a>
+      <a href="#" onclick="loadLesson(9)">Waypoint 10: The Ranger's Handbook</a>
+      <a href="#" onclick="loadLesson(10)">Waypoint 11: True North</a>
+      <a href="#" onclick="loadLesson(11)">Waypoint 12: The Trail Code</a>
+      <a href="#" onclick="loadLesson(12)">Waypoint 13: Comm Check</a>
+      <a href="#" onclick="loadLesson(13)">Waypoint 14: Resupply</a>
+      <a href="#" onclick="loadLesson(14)">Waypoint 15: Signs and Provision</a>
+      <a href="#" onclick="loadLesson(15)">Waypoint 16: Homeward Bound</a>
+      
+      <div style="height: 60px;"></div> 
     </div>
-</nav>
+  </nav>
 
   <div class="header-container">
     <img src="images/header.png" alt="Basecamp" class="header-img">
@@ -368,8 +329,7 @@
     <h1>Reference Room</h1>
     <div class="card">
       <h2>The Apostle's Creed</h2>
-      <div
-        style="text-align:left; line-height:1.8; font-family:Georgia, serif; font-size:1.2rem; white-space: pre-line;">
+      <div style="text-align:left; line-height:1.8; font-family:Georgia, serif; font-size:1.2rem; white-space: pre-line;">
         I believe in God, the Father almighty, creator of heaven and earth.
         I believe in Jesus Christ, his only Son, our Lord...
       </div>
@@ -379,14 +339,12 @@
 
   <div id="view-lesson" class="view">
     <h1 id="lesson-title">Loading...</h1>
-
     <div class="card">
       <h3>📹 Field Briefing</h3>
       <div class="video-container">
         <iframe id="lesson-video" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
       </div>
     </div>
-
     <div class="card">
       <h3>✅ Mission Checklist</h3>
       <ul class="checklist">
@@ -396,33 +354,25 @@
         <li><input type="checkbox" id="check-match" onchange="saveProgress(true)"> <span>Match Game Victory</span></li>
       </ul>
     </div>
-
     <div class="card">
       <h3>📖 Ancient Paths</h3>
       <p id="bible-ref-display" style="font-weight:bold; font-size: 1.3rem; color: var(--primary);"></p>
       <button class="btn" onclick="showBible()" style="background:var(--primary);">Open Scripture</button>
     </div>
-
     <div class="card">
       <h3>🎒 Training Activities</h3>
       <a id="link-flashcards" href="#" target="_blank" class="activity-btn">📝 Open Flashcards</a>
-      <a id="link-match" href="#" target="_blank" class="activity-btn"
-        style="border-color: var(--secondary); color: var(--secondary); box-shadow: 0 4px 0 var(--secondary);">🎮 Launch
-        Match Game</a>
+      <a id="link-match" href="#" target="_blank" class="activity-btn" style="border-color: var(--secondary); color: var(--secondary); box-shadow: 0 4px 0 var(--secondary);">🎮 Launch Match Game</a>
     </div>
-
     <div class="card" style="background: #EEEADF;">
       <h3>📓 Leader's Log</h3>
-      <textarea id="leaders-log"
-        style="width:100%; height:120px; border:2px solid #CCC; padding:10px; border-radius:6px; font-family: inherit;"
-        placeholder="Record your observations here..." oninput="saveProgress(false)"></textarea>
+      <textarea id="leaders-log" style="width:100%; height:120px; border:2px solid #CCC; padding:10px; border-radius:6px; font-family: inherit;" placeholder="Record your observations here..." oninput="saveProgress(false)"></textarea>
     </div>
   </div>
 
   <div id="bibleModal" class="modal">
     <div class="modal-content">
-      <span style="float:right; cursor:pointer; font-weight:bold; color: var(--secondary);"
-        onclick="closeBibleModal()">CLOSE [X]</span>
+      <span style="float:right; cursor:pointer; font-weight:bold; color: var(--secondary);" onclick="closeBibleModal()">CLOSE [X]</span>
       <h2 id="modal-ref"></h2>
       <div id="modal-body"></div>
       <button class="btn" style="width:100%; margin-top:20px;" onclick="closeBibleModal()">Done Reading</button>
@@ -430,7 +380,6 @@
   </div>
 
   <script>
-    // Updated Lesson Array to match all 16 Waypoints
     const lessons = [
       { title: "Waypoint 1: Trailhead", video: "", bibleRef: "Genesis 1:1-2:3", flashcards: "https://quizlet.com/1156634382/flashcards", match: "https://quizlet.com/1156634382/match" },
       { title: "Waypoint 2: Ranger Station", video: "", bibleRef: "Exodus 3", flashcards: "", match: "" },
@@ -462,36 +411,30 @@
     }
 
     function loadLesson(idx) {
-    currentIdx = idx;
-    const l = lessons[idx];
-    
-    // 1. Update Content
-    document.getElementById('lesson-title').innerText = l.title;
-    document.getElementById('lesson-video').src = l.video ? l.video : "";
-    document.getElementById('bible-ref-display').innerText = l.bibleRef;
-    document.getElementById('link-flashcards').href = l.flashcards;
-    document.getElementById('link-match').href = l.match;
+      currentIdx = idx;
+      const l = lessons[idx];
+      document.getElementById('lesson-title').innerText = l.title;
+      document.getElementById('lesson-video').src = l.video ? l.video : "";
+      document.getElementById('bible-ref-display').innerText = l.bibleRef;
+      document.getElementById('link-flashcards').href = l.flashcards;
+      document.getElementById('link-match').href = l.match;
 
-    // 2. Load Saved Progress
-    const saved = JSON.parse(localStorage.getItem(`basecamp_w${idx}`) || '{}');
-    document.getElementById('check-video').checked = saved.v || false;
-    document.getElementById('check-bible').checked = saved.b || false;
-    document.getElementById('check-study').checked = saved.s || false;
-    document.getElementById('check-match').checked = saved.m || false;
-    document.getElementById('leaders-log').value = saved.l || "";
+      const saved = JSON.parse(localStorage.getItem(`basecamp_w${idx}`) || '{}');
+      document.getElementById('check-video').checked = saved.v || false;
+      document.getElementById('check-bible').checked = saved.b || false;
+      document.getElementById('check-study').checked = saved.s || false;
+      document.getElementById('check-match').checked = saved.m || false;
+      document.getElementById('leaders-log').value = saved.l || "";
 
-    // 3. Highlight the menu item
-    const menuLinks = document.querySelectorAll('#nav-menu a');
-    menuLinks.forEach((link, i) => {
-        link.classList.remove('current-waypoint');
-        // We adjust for the first two links (Home and Reference)
-        if (link.getAttribute('onclick') === `loadLesson(${idx})`) {
-            link.classList.add('current-waypoint');
-        }
-    });
-
-    showView('lesson');
-}
+      const menuLinks = document.querySelectorAll('#nav-menu a');
+      menuLinks.forEach((link) => {
+          link.classList.remove('current-waypoint');
+          if (link.getAttribute('onclick') === `loadLesson(${idx})`) {
+              link.classList.add('current-waypoint');
+          }
+      });
+      showView('lesson');
+    }
 
     function saveProgress(showToast) {
       const data = {
@@ -533,5 +476,4 @@
     window.onload = () => { showView('home'); };
   </script>
 </body>
-
 </html>
