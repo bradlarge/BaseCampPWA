@@ -512,18 +512,48 @@
 
     // --- 4. SCRIPTURE API ---
     async function showBible() {
-      const l = lessons[currentIdx];
-      document.getElementById('bibleModal').style.display = 'block';
-      document.getElementById('modal-ref').innerText = l.bibleRef;
-      document.getElementById('modal-body').innerText = "Fetching scripture...";
-      try {
+    const l = lessons[currentIdx];
+    const modal = document.getElementById('bibleModal');
+    const modalBody = document.getElementById('modal-body');
+    
+    modal.style.display = 'block';
+    document.getElementById('modal-ref').innerText = l.bibleRef;
+    modalBody.innerHTML = "<p style='text-align:center; font-family: Montserrat, sans-serif;'>📜 Unrolling the scroll...</p>";
+
+    try {
         const res = await fetch(`https://bible-api.com/${l.bibleRef}?translation=web`);
         const data = await res.json();
-        document.getElementById('modal-body').innerText = data.text;
-      } catch (e) {
-        document.getElementById('modal-body').innerHTML = `Failed. <a href="https://www.biblegateway.com/passage/?search=${l.bibleRef}&version=WEB" target="_blank">View Online</a>`;
-      }
+
+        if (data.verses) {
+            // We wrap the whole passage in a Serif font for a "Classic Bible" feel
+            const formattedText = data.verses.map(v => {
+                return `<span style="display: inline;">
+                            <sup style="color:var(--secondary); font-size: 0.7rem; font-weight: bold; margin-right: 2px;">${v.verse}</sup>${v.text.trim()}
+                        </span>`;
+            }).join(' ');
+
+            modalBody.innerHTML = `
+                <div style="
+                    text-align: left; 
+                    font-family: 'Georgia', serif; 
+                    font-size: 1.3rem; 
+                    line-height: 1.8; 
+                    color: #222;
+                    letter-spacing: 0.01rem;
+                    padding: 10px 5px;
+                ">
+                    ${formattedText}
+                </div>`;
+        } else {
+            throw new Error("Verse not found");
+        }
+    } catch(e) {
+        modalBody.innerHTML = `
+            <p style='font-family: Montserrat, sans-serif;'>The trail is blocked. We couldn't fetch the text.</p>
+            <a href="https://www.biblegateway.com/passage/?search=${l.bibleRef}&version=WEB" 
+               target="_blank" class="btn" style="width:100%; box-sizing:border-box;">Open on Bible Gateway</a>`;
     }
+}
 
     function closeBibleModal() { document.getElementById('bibleModal').style.display = 'none'; }
 
