@@ -64,51 +64,57 @@
     </div>
 
     <script>
-        // 1. ADD YOUR DATA HERE
-        const lessons = [
-            {
-                title: "Week 1: Adventure Begins",
-                video: "YOUTUBE_URL_1",
-                bible: "BIBLE_URL_1",
-                quizlet: "https://quizlet.com/1156634382/flashcards/embed?i=72vrag&x=1jj1"
-            },
-            {
-                title: "Week 2: Into the Woods",
-                video: "YOUTUBE_URL_2",
-                bible: "BIBLE_URL_2",
-                quizlet: "https://quizlet.com/SECOND_SET_ID/flashcards/embed"
-            }
-        ];
-
-        
-        let currentIdx = 0;
-
-        function loadLesson(index) {
-            const lesson = lessons[index];
-            document.getElementById('lesson-title').innerText = lesson.title;
-            document.getElementById('video-link').href = lesson.video;
-            document.getElementById('bible-link').href = lesson.bible;
-            document.getElementById('quizlet-container').innerHTML = `<iframe src="${lesson.quizlet}"></iframe>`;
-            
-            // UI updates
-            currentIdx = index;
-            document.getElementById('prev-btn').classList.toggle('hidden', index === 0);
-            document.getElementById('next-btn').classList.toggle('hidden', index === lessons.length - 1);
-            toggleMenu(false);
-            window.scrollTo(0,0);
+    // 1. YOUR UPDATED LESSON DATA
+    const lessons = [
+        {
+            title: "Week 1: Adventure Begins",
+            video: "YOUR_YOUTUBE_LINK_HERE", 
+            bible: "YOUR_BIBLE_LINK_HERE",
+            // Updated to your Flashcards link
+            quizlet: "https://quizlet.com/1156634382/flashcards/embed?i=72vrag&x=1jj1"
+        },
+        {
+            title: "Week 2: Into the Woods",
+            video: "YOUR_YOUTUBE_LINK_HERE",
+            bible: "YOUR_BIBLE_LINK_HERE",
+            quizlet: "https://quizlet.com/YOUR_NEXT_SET_ID/flashcards/embed"
         }
+    ];
 
-        function nextLesson() { if(currentIdx < lessons.length - 1) loadLesson(currentIdx + 1); }
-        function prevLesson() { if(currentIdx > 0) loadLesson(currentIdx - 1); }
+    let currentIdx = 0;
+
+    function loadLesson(index) {
+        const lesson = lessons[index];
         
-        function toggleMenu(forceClose) {
-            const menu = document.getElementById('nav-menu');
-            if (forceClose === false) menu.classList.remove('active');
-            else menu.classList.toggle('active');
-        }
+        // Update Text and Links
+        document.getElementById('lesson-title').innerText = lesson.title;
+        document.getElementById('video-link').href = lesson.video;
+        document.getElementById('bible-link').href = lesson.bible;
+        
+        // Update Quizlet Iframe
+        const container = document.getElementById('quizlet-container');
+        container.innerHTML = `<iframe src="${lesson.quizlet}" height="500" width="100%" style="border:0" allowfullscreen></iframe>`;
+        
+        // Update Navigation State
+        currentIdx = index;
+        document.getElementById('prev-btn').style.visibility = (index === 0) ? 'hidden' : 'visible';
+        document.getElementById('next-btn').style.visibility = (index === lessons.length - 1) ? 'hidden' : 'visible';
+        
+        toggleMenu(false); // Close menu after selection
+        window.scrollTo(0,0); // Scroll to top for new lesson
+    }
 
-        // Initialize first lesson
-        loadLesson(0);
-    </script>
+    function nextLesson() { if(currentIdx < lessons.length - 1) loadLesson(currentIdx + 1); }
+    function prevLesson() { if(currentIdx > 0) loadLesson(currentIdx - 1); }
+    
+    function toggleMenu(forceClose) {
+        const menu = document.getElementById('nav-menu');
+        if (forceClose === false) menu.classList.remove('active');
+        else menu.classList.toggle('active');
+    }
+
+    // Start the app on the first lesson
+    loadLesson(0);
+</script>
 </body>
 </html>
