@@ -20,7 +20,7 @@
         }
 
         /* Navigation */
-        .menu-btn { position: fixed; top: 15px; left: 15px; background: var(--primary); color: var(--accent); border: 2px solid var(--accent); padding: 10px 15px; border-radius: 4px; cursor: pointer; z-index: 1001; font-family: 'Archivo Black', sans-serif; }
+        .menu-btn { position: fixed; top: 15px; left: 15px; background: var(--primary); color: var(--accent); border: 2px solid var(--accent); padding: 10px 15px; border-radius: 4px; cursor: pointer; z-index: 1001; font-family: 'Archivo Black', sans-serif; font-size: 0.75rem; }
         #nav-menu { position: fixed; top: 0; left: -100%; width: 280px; height: 100%; background: var(--primary); z-index: 1000; transition: 0.4s; padding-top: 80px; text-align: left; box-shadow: 5px 0 15px rgba(0,0,0,0.3); overflow-y: auto; }
         #nav-menu.active { left: 0; }
         #nav-menu a { display: block; padding: 15px 25px; color: var(--bg); text-decoration: none; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; }
@@ -29,39 +29,35 @@
         .header-container { width: 100%; background: var(--primary); border-bottom: 5px solid var(--secondary); line-height: 0; }
         .header-img { width: 100%; height: auto; max-width: 1080px; display: block; margin: 0 auto; }
 
-        /* Views Management */
+        /* View Control */
         .view { display: none; padding: 15px; max-width: 900px; margin: 0 auto; text-align: center; box-sizing: border-box; }
         .view.active { display: block; }
 
         h1 { font-family: 'Archivo Black', sans-serif; text-transform: uppercase; color: var(--primary); font-size: 1.8rem; margin: 20px 0; }
-        h2 { font-family: 'Alfa Slab One', cursive; color: var(--secondary); text-transform: uppercase; }
+        h2 { font-family: 'Alfa Slab One', cursive; color: var(--secondary); text-transform: uppercase; margin-top: 0; }
         h3 { font-family: 'Alfa Slab One', cursive; color: var(--secondary); font-size: 0.9rem; text-transform: uppercase; margin-bottom: 15px; }
 
         .card { background: var(--white); border-radius: 8px; padding: 25px; margin-bottom: 30px; border: 1px solid #E0DED7; box-shadow: 0 4px 0px rgba(0,0,0,0.1); box-sizing: border-box; }
         
-        /* Creed/Prayer Styling */
-        .ancient-text { text-align: left; line-height: 2; font-size: 1.1rem; white-space: pre-line; border-left: 4px solid var(--accent); padding-left: 20px; margin: 20px 0; }
+        /* Reference Text */
+        .ancient-text { text-align: left; line-height: 1.8; font-size: 1.1rem; white-space: pre-line; border-left: 4px solid var(--accent); padding-left: 20px; margin: 20px 0; font-weight: 500; color: var(--primary); }
 
         /* Checklist */
         .checklist { text-align: left; list-style: none; padding: 0; }
         .checklist li { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #F0EFEA; font-weight: 700; color: var(--primary); }
-        .checklist input { width: 24px; height: 24px; margin-right: 15px; accent-color: var(--secondary); }
+        .checklist input { width: 24px; height: 24px; margin-right: 15px; accent-color: var(--secondary); cursor: pointer; }
 
-        /* Iframes */
-        iframe { border: 4px solid var(--primary); border-radius: 4px; width: 100%; background: #EEEADF; display: block; }
-        .video-frame { height: 400px; }
-        .quizlet-frame { height: 650px; }
-        
-        .launch-helper { margin-bottom: 10px; display: block; text-decoration: none; background: var(--bg); border: 1px dashed var(--secondary); color: var(--secondary); padding: 10px; font-size: 0.8rem; font-weight: bold; border-radius: 4px; }
+        /* Iframe & Bridge */
+        iframe { border: 4px solid var(--primary); border-radius: 4px; width: 100%; height: 600px; background: #EEEADF; display: block; }
+        .bridge-btn { display: block; width: 100%; background: var(--accent); color: var(--primary); font-family: 'Archivo Black', sans-serif; text-decoration: none; padding: 12px; margin-bottom: 15px; border-radius: 4px; font-size: 0.8rem; border: none; cursor: pointer; text-align: center; box-sizing: border-box; }
 
-        /* Buttons */
+        /* General Buttons */
         .btn { display: inline-block; background: var(--secondary); color: var(--bg); padding: 16px 28px; border-radius: 4px; font-family: 'Archivo Black', sans-serif; text-transform: uppercase; border: none; cursor: pointer; box-shadow: 0 4px 0 #8A452A; margin: 10px; text-decoration: none; }
         .btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #8A452A; }
 
+        /* Modal */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(45, 71, 57, 0.9); }
         .modal-content { background: var(--bg); margin: 5% auto; padding: 30px; width: 85%; max-width: 500px; border: 8px solid var(--primary); border-radius: 4px; max-height: 80vh; overflow-y: auto; text-align: left; }
-        
-        .nav-controls { display: flex; justify-content: space-between; padding-bottom: 50px; }
     </style>
 </head>
 <body>
@@ -70,10 +66,10 @@
 
     <nav id="nav-menu">
         <div class="nav-section">Basecamp HQ</div>
-        <a href="#" onclick="showView('home')">🏠 Home</a>
+        <a href="#" onclick="showView('home')">🏠 Home Base</a>
         <a href="#" onclick="showView('reference')">📜 Creeds & Prayers</a>
         
-        <div class="nav-section">Trail Map</div>
+        <div class="nav-section">The Trails</div>
         <a href="#" onclick="loadLesson(0)">Week 1: Adventure Begins</a>
         <a href="#" onclick="loadLesson(1)">Week 2: Into the Woods</a>
     </nav>
@@ -86,13 +82,8 @@
         <h1>Welcome to Basecamp</h1>
         <div class="card">
             <h2>The Mission</h2>
-            <p>Basecamp is a rugged adventure into the <strong>Ancient Paths</strong> of our faith. Here, we train young leaders to memorize the catechism, study the Word, and prepare for the trail ahead.</p>
-            <button class="btn" onclick="loadLesson(0)">Start the Trail</button>
-        </div>
-        <div class="card">
-            <h3>Quick Links</h3>
-            <a href="https://yourchurchlink.com" target="_blank" class="btn" style="background:var(--primary); font-size:0.7rem;">Church Website</a>
-            <a href="#" onclick="showView('reference')" class="btn" style="background:var(--neutral); font-size:0.7rem;">Study Reference</a>
+            <p>Training young leaders in the <strong>Ancient Paths</strong> of the faith through memory, study, and prayer.</p>
+            <button class="btn" onclick="loadLesson(0)">Begin the Trail</button>
         </div>
     </div>
 
@@ -101,20 +92,15 @@
         <div class="card">
             <h2>The Apostle's Creed</h2>
             <div class="ancient-text">
-                I believe in God, the Father Almighty,
-                Maker of heaven and earth.
-                And in Jesus Christ, His only Son, our Lord...
-                (Add full text here)
+                I believe in God, the Father almighty, creator of heaven and earth.
+                I believe in Jesus Christ, his only Son, our Lord...
             </div>
         </div>
         <div class="card">
             <h2>The Lord's Prayer</h2>
             <div class="ancient-text">
-                Our Father, who art in heaven,
-                hallowed be thy name.
-                Thy kingdom come, thy will be done,
-                on earth as it is in heaven...
-                (Add full text here)
+                Our Father, who art in heaven, hallowed be thy name.
+                Thy kingdom come, thy will be done...
             </div>
         </div>
         <button class="btn" onclick="showView('home')">Return to HQ</button>
@@ -122,46 +108,41 @@
 
     <div id="view-lesson" class="view">
         <h1 id="lesson-title">Loading...</h1>
-        <div class="card" style="border-top: 6px solid var(--primary);">
-            <h3>✅ My Mission</h3>
+        
+        <div class="card">
+            <h3>✅ Mission Progress</h3>
             <ul class="checklist">
-                <li><input type="checkbox" id="check-video" onchange="saveProgress()"> <span>Watch Field Briefing</span></li>
-                <li><input type="checkbox" id="check-bible" onchange="saveProgress()"> <span>Read Ancient Paths</span></li>
-                <li><input type="checkbox" id="check-study" onchange="saveProgress()"> <span>Study Flashcards</span></li>
-                <li><input type="checkbox" id="check-match" onchange="saveProgress()"> <span>Win Match Game</span></li>
+                <li><input type="checkbox" id="check-video" onchange="saveProgress()"> <span>Field Briefing</span></li>
+                <li><input type="checkbox" id="check-bible" onchange="saveProgress()"> <span>Ancient Paths Reading</span></li>
+                <li><input type="checkbox" id="check-study" onchange="saveProgress()"> <span>Flashcard Study</span></li>
+                <li><input type="checkbox" id="check-match" onchange="saveProgress()"> <span>Match Game Victory</span></li>
             </ul>
         </div>
+
         <div class="card">
             <h3>📖 Ancient Paths</h3>
             <p id="bible-ref-display" style="font-weight:bold; font-size: 1.2rem; color: var(--primary);"></p>
-            <button class="btn" onclick="showBible()" style="background:var(--primary); box-shadow: 0 4px 0 #1B2B22;">Open Scroll</button>
+            <button class="btn" onclick="showBible()" style="background:var(--primary);">Open Scroll</button>
         </div>
-        <div class="card">
-            <h3>📺 Field Briefing</h3>
-            <iframe id="video-frame" class="video-frame" src="" allowfullscreen></iframe>
-        </div>
+
         <div class="card">
             <h3>📝 Step 1: Flashcards</h3>
-            <a id="flash-link" href="#" target="_blank" class="launch-helper">🚀 Tap here if screen is blank</a>
-            <iframe id="quizlet-flash" class="quizlet-frame" src="" allowfullscreen></iframe>
+            <a id="flash-gate" href="#" target="_blank" class="bridge-btn" onclick="prepareRefresh('quizlet-flash')">🚧 Check-in at the Gate (Verify)</a>
+            <iframe id="quizlet-flash" src="" allowfullscreen></iframe>
         </div>
+
         <div class="card">
             <h3>🎮 Step 2: Match Game</h3>
-            <a id="match-link" href="#" target="_blank" class="launch-helper">🚀 Tap here if screen is blank</a>
-            <iframe id="quizlet-match" class="quizlet-frame" src="" allowfullscreen></iframe>
-        </div>
-        <div class="nav-controls">
-            <button class="btn" id="prev-btn" onclick="prevLesson()" style="background:var(--neutral); box-shadow: 0 4px 0 #222;">← Back</button>
-            <button class="btn" id="next-btn" onclick="nextLesson()">Next →</button>
+            <a id="match-gate" href="#" target="_blank" class="bridge-btn" onclick="prepareRefresh('quizlet-match')">🚧 Check-in at the Gate (Verify)</a>
+            <iframe id="quizlet-match" src="" allowfullscreen></iframe>
         </div>
     </div>
 
     <div id="bibleModal" class="modal">
         <div class="modal-content">
-            <span style="float:right; cursor:pointer; font-weight:bold; color: var(--secondary);" onclick="closeBibleModal()">CLOSE X</span>
+            <span style="float:right; cursor:pointer; font-weight:bold;" onclick="closeBibleModal()">[CLOSE]</span>
             <h2 id="modal-ref"></h2>
             <div id="modal-body"></div>
-            <button class="btn" style="width:100%; margin-top:20px;" onclick="closeBibleModal()">Done Reading</button>
         </div>
     </div>
 
@@ -169,17 +150,13 @@
         const lessons = [
             {
                 title: "Week 1: Adventure Begins",
-                video: "https://www.youtube.com/embed/dQw4w9WgXcQ", 
                 bibleRef: "Genesis 1:1-2:3",
-                bibleUrl: "https://www.biblegateway.com/passage/?search=Genesis+1%3A1-2%3A3&version=WEB",
                 flashcards: "https://quizlet.com/1156634382/flashcards/embed?i=72vrag&x=1jj1",
                 match: "https://quizlet.com/1156634382/match/embed?i=72vrag&x=1jj1"
             },
             {
                 title: "Week 2: Into the Woods",
-                video: "https://www.youtube.com/embed/WATCH_ID",
                 bibleRef: "Exodus 3",
-                bibleUrl: "https://www.biblegateway.com/passage/?search=Exodus+3&version=WEB",
                 flashcards: "https://quizlet.com/SET_ID/flashcards/embed",
                 match: "https://quizlet.com/SET_ID/match/embed"
             }
@@ -192,8 +169,42 @@
         function showView(viewId) {
             document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
             document.getElementById('view-' + viewId).classList.add('active');
-            toggleMenu();
+            if (document.getElementById('nav-menu').classList.contains('active')) toggleMenu();
             window.scrollTo(0,0);
+        }
+
+        function prepareRefresh(frameId) {
+            // Wait 4 seconds for user to verify in the new tab, then kick the iframe
+            setTimeout(() => {
+                const frame = document.getElementById(frameId);
+                const originalSrc = frame.src;
+                frame.src = '';
+                frame.src = originalSrc;
+            }, 4000);
+        }
+
+        function loadLesson(idx) {
+            currentIdx = idx;
+            const l = lessons[idx];
+            document.getElementById('lesson-title').innerText = l.title;
+            document.getElementById('bible-ref-display').innerText = l.bibleRef;
+            
+            // Set Frames
+            document.getElementById('quizlet-flash').src = l.flashcards;
+            document.getElementById('quizlet-match').src = l.match;
+            
+            // Set Gate links (Stripping /embed for the full page verification)
+            document.getElementById('flash-gate').href = l.flashcards.replace('/embed', '');
+            document.getElementById('match-gate').href = l.match.replace('/embed', '');
+
+            // Saved Progress
+            const saved = JSON.parse(localStorage.getItem(`basecamp_w${idx}`) || '{}');
+            document.getElementById('check-video').checked = saved.v || false;
+            document.getElementById('check-bible').checked = saved.b || false;
+            document.getElementById('check-study').checked = saved.s || false;
+            document.getElementById('check-match').checked = saved.m || false;
+
+            showView('lesson');
         }
 
         function saveProgress() {
@@ -210,40 +221,17 @@
             const l = lessons[currentIdx];
             document.getElementById('bibleModal').style.display = 'block';
             document.getElementById('modal-ref').innerText = l.bibleRef;
-            document.getElementById('modal-body').innerText = "Loading...";
+            document.getElementById('modal-body').innerText = "Fetching scroll...";
             try {
                 const res = await fetch(`https://bible-api.com/${l.bibleRef}?translation=web`);
                 const data = await res.json();
                 document.getElementById('modal-body').innerText = data.text;
             } catch(e) {
-                document.getElementById('modal-body').innerHTML = `Failed. <a href="${l.bibleUrl}">Open Link</a>`;
+                document.getElementById('modal-body').innerText = "Connection lost. Try again later.";
             }
         }
 
         function closeBibleModal() { document.getElementById('bibleModal').style.display = 'none'; }
-
-        function loadLesson(idx) {
-            currentIdx = idx;
-            const l = lessons[idx];
-            document.getElementById('lesson-title').innerText = l.title;
-            document.getElementById('video-frame').src = l.video;
-            document.getElementById('quizlet-flash').src = l.flashcards;
-            document.getElementById('quizlet-match').src = l.match;
-            document.getElementById('flash-link').href = l.flashcards.replace('/embed', '');
-            document.getElementById('match-link').href = l.match.replace('/embed', '');
-            document.getElementById('bible-ref-display').innerText = l.bibleRef;
-            
-            const saved = JSON.parse(localStorage.getItem(`basecamp_w${idx}`) || '{}');
-            document.getElementById('check-video').checked = saved.v || false;
-            document.getElementById('check-bible').checked = saved.b || false;
-            document.getElementById('check-study').checked = saved.s || false;
-            document.getElementById('check-match').checked = saved.m || false;
-
-            showView('lesson');
-        }
-
-        function nextLesson() { if(currentIdx < lessons.length - 1) loadLesson(currentIdx + 1); }
-        function prevLesson() { if(currentIdx > 0) loadLesson(currentIdx - 1); }
 
         if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
     </script>
