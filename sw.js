@@ -2,10 +2,7 @@ const cacheName = 'basecamp-v1';
 const assets = [
   './',
   './index.html',
-  './manifest.json',
-  './images/header.png',
-  './images/icon-192.png',
-  './images/icon-512.png'
+  './manifest.json'
 ];
 
 self.addEventListener('install', e => {
