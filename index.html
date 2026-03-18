@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basecamp Kids</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        :root { --primary: #2c5f2d; --secondary: #ff7f50; --accent: #6b5b95; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f7ff; color: #333; margin: 0; padding: 0; text-align: center; }
+        
+        /* Navigation Menu */
+        #nav-menu { position: fixed; top: 0; left: -100%; width: 250px; height: 100%; background: white; box-shadow: 2px 0 10px rgba(0,0,0,0.2); transition: 0.3s; z-index: 1000; padding-top: 60px; text-align: left; }
+        #nav-menu a { display: block; padding: 15px 25px; text-decoration: none; color: #333; border-bottom: 1px solid #eee; }
+        #nav-menu.active { left: 0; }
+        .menu-btn { position: fixed; top: 15px; left: 15px; background: var(--primary); color: white; border: none; padding: 10px 15px; border-radius: 5px; cursor: pointer; z-index: 1001; font-weight: bold; }
+
+        .header-container { width: 100%; overflow: hidden; background: var(--primary); }
+        .header-img { width: 100%; height: auto; max-width: 1080px; display: block; margin: 0 auto; }
+        .content { padding: 20px; max-width: 600px; margin: 0 auto; }
+        
+        .card { background: white; border-radius: 20px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 25px; }
+        .btn { display: inline-block; background: var(--secondary); color: white; padding: 15px 25px; text-decoration: none; border-radius: 30px; font-weight: bold; margin: 10px; border: none; cursor: pointer; }
+        
+        .nav-controls { display: flex; justify-content: space-between; margin-top: 20px; }
+        iframe { border: 0; border-radius: 15px; width: 100%; height: 500px; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+    <button class="menu-btn" onclick="toggleMenu()">☰ MENU</button>
+
+    <nav id="nav-menu">
+        <h3 style="padding-left: 25px;">All Lessons</h3>
+        <a href="#" onclick="loadLesson(0)">Week 1: Adventure Begins</a>
+        <a href="#" onclick="loadLesson(1)">Week 2: The Journey</a>
+        <a href="#" onclick="loadLesson(2)">Week 3: The Mountain</a>
+    </nav>
+
+    <div class="header-container">
+        <img src="images/header.jpg" alt="Basecamp" class="header-img">
+    </div>
+
+    <div class="content">
+        <h1 id="lesson-title">Week 1</h1>
+
+        <div class="card">
+            <h3>📺 Video & Bible</h3>
+            <a id="video-link" href="#" class="btn" target="_blank">Watch Video</a>
+            <a id="bible-link" href="#" class="btn" style="background: var(--accent);" target="_blank">Read Bible</a>
+        </div>
+
+        <div class="card">
+            <h3 id="game-title">Match Game</h3>
+            <div id="quizlet-container">
+                </div>
+        </div>
+
+        <div class="nav-controls">
+            <button class="btn" id="prev-btn" onclick="prevLesson()" style="background: #999;">← Previous</button>
+            <button class="btn" id="next-btn" onclick="nextLesson()">Next →</button>
+        </div>
+    </div>
+
+    <script>
+        // 1. ADD YOUR DATA HERE
+        const lessons = [
+            {
+                title: "Week 1: Adventure Begins",
+                video: "YOUTUBE_URL_1",
+                bible: "BIBLE_URL_1",
+                quizlet: "https://quizlet.com/1156634382/match/embed?i=72vrag&x=1jj1"
+            },
+            {
+                title: "Week 2: Into the Woods",
+                video: "YOUTUBE_URL_2",
+                bible: "BIBLE_URL_2",
+                quizlet: "https://quizlet.com/SECOND_SET_ID/match/embed"
+            }
+        ];
+
+        let currentIdx = 0;
+
+        function loadLesson(index) {
+            const lesson = lessons[index];
+            document.getElementById('lesson-title').innerText = lesson.title;
+            document.getElementById('video-link').href = lesson.video;
+            document.getElementById('bible-link').href = lesson.bible;
+            document.getElementById('quizlet-container').innerHTML = `<iframe src="${lesson.quizlet}"></iframe>`;
+            
+            // UI updates
+            currentIdx = index;
+            document.getElementById('prev-btn').classList.toggle('hidden', index === 0);
+            document.getElementById('next-btn').classList.toggle('hidden', index === lessons.length - 1);
+            toggleMenu(false);
+            window.scrollTo(0,0);
+        }
+
+        function nextLesson() { if(currentIdx < lessons.length - 1) loadLesson(currentIdx + 1); }
+        function prevLesson() { if(currentIdx > 0) loadLesson(currentIdx - 1); }
+        
+        function toggleMenu(forceClose) {
+            const menu = document.getElementById('nav-menu');
+            if (forceClose === false) menu.classList.remove('active');
+            else menu.classList.toggle('active');
+        }
+
+        // Initialize first lesson
+        loadLesson(0);
+    </script>
+</body>
+</html>
