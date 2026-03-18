@@ -19,19 +19,21 @@
         .header-img { width: 100%; height: auto; max-width: 1080px; display: block; margin: 0 auto; }
         .content { padding: 20px; max-width: 600px; margin: 0 auto; }
         
-        .card { background: white; border-radius: 20px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 25px; border: 1px solid #eef2f5; }
+        .card { background: white; border-radius: 20px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 25px; border: 1px solid #eef2f5; overflow: hidden; }
         h1 { color: var(--primary); margin: 15px 0; font-size: 1.6rem; }
-        h3 { margin-top: 0; color: #555; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
+        h3 { margin-top: 0; color: #555; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; }
 
         .btn { display: inline-block; background: var(--secondary); color: white; padding: 14px 24px; text-decoration: none; border-radius: 30px; font-weight: bold; margin: 10px; border: none; cursor: pointer; }
         
-        /* Frame Styling for Bible and Quizlet */
-        .app-frame { border: 0; border-radius: 15px; width: 100%; height: 500px; background: #eee; margin-top: 15px; }
+        /* Frame Styling - Ensures they are visible */
+        iframe { border: 0; border-radius: 15px; width: 100%; background: #f9f9f9; display: block; }
+        .video-frame { height: 315px; }
+        .quizlet-frame { height: 500px; }
+        .bible-frame { height: 500px; margin-top: 15px; }
 
         .nav-controls { display: flex; justify-content: space-between; margin: 20px 0 40px 0; }
         .hidden { visibility: hidden; }
-        
-        #bible-container { display: none; } /* Hidden until button is clicked */
+        #bible-container { display: none; } 
     </style>
 </head>
 <body>
@@ -52,27 +54,22 @@
         <h1 id="lesson-title">Loading...</h1>
 
         <div class="card">
+            <h3>📺 Video Lesson</h3>
+            <iframe id="video-frame" class="video-frame" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+        </div>
+
+        <div class="card">
             <h3>📖 Bible Reading</h3>
-            <p id="bible-ref-text" style="font-weight:bold;"></p>
+            <p id="bible-ref-text" style="font-weight:bold; color: var(--accent);"></p>
             <button class="btn" style="background: var(--accent);" onclick="showBible()">Open Scripture</button>
             <div id="bible-container">
-                <iframe id="bible-frame" src="" class="app-frame"></iframe>
+                <iframe id="bible-frame" src="" class="bible-frame"></iframe>
             </div>
         </div>
 
         <div class="card">
-    <h3>📺 Video Lesson</h3>
-    <div id="video-container">
-        <iframe id="video-frame" width="100%" height="315" src="" 
-                title="YouTube video player" frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowfullscreen style="border-radius:15px;"></iframe>
-    </div>
-</div>
-
-        <div class="card">
             <h3>🧠 Game Challenge</h3>
-            <iframe id="quizlet-game" src="" class="app-frame" allowfullscreen></iframe>
+            <iframe id="quizlet-game" src="" class="quizlet-frame" allowfullscreen></iframe>
         </div>
 
         <div class="nav-controls">
@@ -85,7 +82,7 @@
         const lessons = [
             {
                 title: "Week 1: Adventure Begins",
-                // Make sure the link has /embed/ in it!
+                // MUST BE THE EMBED LINK (has /embed/ in the URL)
                 video: "https://www.youtube.com/embed/dQw4w9WgXcQ", 
                 bibleRef: "Genesis 1:1-2:3",
                 bibleUrl: "https://www.biblegateway.com/passage/?search=Genesis+1%3A1-2%3A3&version=WEB",
@@ -93,10 +90,10 @@
             },
             {
                 title: "Week 2: Into the Woods",
-                video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                video: "https://www.youtube.com/embed/WATCH_ID_HERE",
                 bibleRef: "Exodus 3",
                 bibleUrl: "https://www.biblegateway.com/passage/?search=Exodus+3&version=WEB",
-                quizlet: "https://quizlet.com/1156634382/flashcards/embed?i=72vrag&x=1jj1"
+                quizlet: "https://quizlet.com/YOUR_SET_ID/flashcards/embed"
             }
         ];
 
@@ -110,18 +107,21 @@
             const lesson = lessons[index];
             currentIdx = index;
 
+            // 1. Update Lesson Title
             document.getElementById('lesson-title').innerText = lesson.title;
-            document.getElementById('video-link').href = lesson.video;
             
-            // Set Bible Info
+            // 2. Update Video Frame (Fixed ID target)
+            document.getElementById('video-frame').src = lesson.video;
+            
+            // 3. Update Bible Info
             document.getElementById('bible-ref-text').innerText = lesson.bibleRef;
             document.getElementById('bible-frame').src = lesson.bibleUrl;
-            document.getElementById('bible-container').style.display = 'none'; // Hide until clicked
+            document.getElementById('bible-container').style.display = 'none'; 
             
-            // Set Quizlet Info
+            // 4. Update Quizlet Frame (Fixed ID target)
             document.getElementById('quizlet-game').src = lesson.quizlet;
             
-            // UI Controls
+            // 5. Navigation visibility
             document.getElementById('prev-btn').style.visibility = (index === 0) ? 'hidden' : 'visible';
             document.getElementById('next-btn').style.visibility = (index === lessons.length - 1) ? 'hidden' : 'visible';
             
@@ -131,12 +131,14 @@
 
         function nextLesson() { if(currentIdx < lessons.length - 1) loadLesson(currentIdx + 1); }
         function prevLesson() { if(currentIdx > 0) loadLesson(currentIdx - 1); }
+        
         function toggleMenu(open) {
             const menu = document.getElementById('nav-menu');
             if (open === false) menu.classList.remove('active');
             else menu.classList.toggle('active');
         }
 
+        // Initialize
         loadLesson(0);
     </script>
 </body>
