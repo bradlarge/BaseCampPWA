@@ -15,7 +15,7 @@
       --neutral: #4A4A4A;
       --bg: #F9F7F2;
       --white: #FFFFFF;
-      --header-height: 60px;
+      --header-height: 80px; 
     }
 
     body {
@@ -28,10 +28,11 @@
       overflow-x: hidden;
     }
 
-    /* TIGHTENED HEADER */
+    /* FIXED HEADER - "THE IN-BETWEEN" */
     .header-container {
       position: fixed;
       top: 0;
+      left: 0;
       width: 100%;
       height: var(--header-height);
       background: var(--white);
@@ -43,27 +44,27 @@
     }
 
     .header-img {
-      height: 40px; /* Slimmed down logo */
+      height: 60px; 
       width: auto;
     }
 
-    /* Navigation - Mobile Optimized */
     .menu-btn {
       position: fixed;
-      top: 10px;
-      left: 10px;
+      top: 22px; 
+      left: 15px;
       background: var(--primary);
       color: var(--accent);
       border: 2px solid var(--accent);
-      padding: 8px 12px;
+      padding: 10px 15px;
       border-radius: 6px;
       cursor: pointer;
       z-index: 1001;
       font-family: 'Archivo Black', sans-serif;
-      font-size: 0.7rem;
+      font-size: 0.8rem;
       box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
     }
 
+    /* NAVIGATION MENU */
     #nav-menu {
       position: fixed;
       top: 0;
@@ -74,7 +75,7 @@
       background: var(--primary);
       z-index: 1000;
       transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      padding-top: 70px;
+      padding-top: 90px;
       overflow-y: auto;
     }
 
@@ -94,10 +95,19 @@
       border-left: 5px solid var(--accent);
     }
 
-    /* View Management */
+    .nav-section {
+      color: var(--accent);
+      padding: 20px 25px 5px 25px;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* VIEW LAYOUT */
     .view {
       display: none;
-      padding: 20px 15px 100px 15px; /* Bottom padding for sticky nav */
+      padding: 20px 15px 120px 15px; 
       max-width: 800px;
       margin: var(--header-height) auto 0 auto;
       text-align: center;
@@ -114,11 +124,22 @@
       box-shadow: 0 4px 0px rgba(0, 0, 0, 0.05);
     }
 
-    h1 { font-family: 'Archivo Black', sans-serif; font-size: 1.5rem; color: var(--primary); margin: 15px 0; }
-    h2 { font-family: 'Alfa Slab One', cursive; color: var(--secondary); font-size: 1.2rem; }
-    h3 { font-family: 'Alfa Slab One', cursive; color: var(--secondary); font-size: 0.85rem; }
+    h1 { font-family: 'Archivo Black', sans-serif; font-size: 1.6rem; color: var(--primary); margin: 15px 0; }
+    h2 { font-family: 'Alfa Slab One', cursive; color: var(--secondary); font-size: 1.2rem; margin-bottom: 10px; }
+    h3 { font-family: 'Alfa Slab One', cursive; color: var(--secondary); font-size: 0.85rem; text-transform: uppercase; margin-bottom: 15px; }
 
-    /* STICKY LESSON NAVIGATION */
+    /* VIDEO & CHECKLIST */
+    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; border: 4px solid var(--primary); background: #000; margin-bottom: 10px; }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+    
+    .checklist { text-align: left; list-style: none; padding: 0; }
+    .checklist li { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #F0EFEA; font-weight: 700; color: var(--primary); }
+    .checklist input { width: 26px; height: 26px; margin-right: 15px; accent-color: var(--secondary); }
+
+    .activity-btn { display: flex; align-items: center; justify-content: center; background: var(--bg); border: 2px solid var(--primary); color: var(--primary); text-decoration: none; padding: 16px; margin: 10px 0; border-radius: 8px; font-family: 'Archivo Black', sans-serif; font-size: 0.85rem; box-shadow: 0 4px 0 var(--primary); }
+    .btn { background: var(--secondary); color: var(--bg); padding: 14px 24px; border-radius: 4px; font-family: 'Archivo Black', sans-serif; text-transform: uppercase; border: none; cursor: pointer; box-shadow: 0 4px 0 #8A452A; text-decoration: none; display: inline-block; }
+
+    /* STICKY NAV */
     .sticky-nav {
       position: fixed;
       bottom: 0;
@@ -127,35 +148,21 @@
       background: var(--white);
       display: flex;
       justify-content: space-between;
-      padding: 10px;
+      padding: 15px;
       box-sizing: border-box;
       border-top: 3px solid var(--primary);
       z-index: 950;
     }
 
-    .nav-btn {
-      flex: 1;
-      margin: 0 5px;
-      padding: 12px;
-      font-size: 0.8rem;
-    }
+    .nav-btn { flex: 1; margin: 0 5px; font-size: 0.8rem; }
 
-    /* Existing Components */
-    .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; border: 4px solid var(--primary); background: #000; }
-    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-    .checklist { text-align: left; list-style: none; padding: 0; }
-    .checklist li { display: flex; align-items: center; padding: 10px 0; border-bottom: 1px solid #F0EFEA; font-weight: 700; color: var(--primary); font-size: 0.9rem; }
-    .checklist input { width: 24px; height: 24px; margin-right: 12px; accent-color: var(--secondary); }
-    .activity-btn { display: flex; align-items: center; justify-content: center; background: var(--bg); border: 2px solid var(--primary); color: var(--primary); text-decoration: none; padding: 15px; margin: 10px 0; border-radius: 8px; font-family: 'Archivo Black', sans-serif; font-size: 0.8rem; }
-    .btn { background: var(--secondary); color: var(--bg); padding: 14px 20px; border-radius: 4px; font-family: 'Archivo Black', sans-serif; text-transform: uppercase; border: none; cursor: pointer; box-shadow: 0 4px 0 #8A452A; text-decoration: none; }
-
-    /* Modals & Toasts */
+    /* MODAL & TOAST */
     .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(45, 71, 57, 0.9); }
-    .modal-content { background: var(--bg); margin: 10% auto; padding: 20px; width: 90%; max-width: 500px; border: 4px solid var(--primary); max-height: 70vh; overflow-y: auto; }
-    #toast { visibility: hidden; min-width: 200px; background-color: var(--primary); color: var(--accent); text-align: center; padding: 12px; position: fixed; z-index: 3000; bottom: 80px; left: 50%; transform: translateX(-50%); font-family: 'Archivo Black', sans-serif; border-radius: 4px; }
+    .modal-content { background: var(--bg); margin: 10% auto; padding: 25px; width: 90%; max-width: 500px; border: 4px solid var(--primary); border-radius: 8px; max-height: 75vh; overflow-y: auto; }
+    #toast { visibility: hidden; min-width: 200px; background-color: var(--primary); color: var(--accent); text-align: center; padding: 15px; position: fixed; z-index: 3000; bottom: 100px; left: 50%; transform: translateX(-50%); font-family: 'Archivo Black', sans-serif; border-radius: 6px; }
     #toast.show { visibility: visible; animation: fadein 0.5s, fadeout 0.5s 2.5s; }
-    @keyframes fadein { from { bottom: 0; opacity: 0; } to { bottom: 80px; opacity: 1; } }
-    @keyframes fadeout { from { bottom: 80px; opacity: 1; } to { bottom: 0; opacity: 0; } }
+    @keyframes fadein { from { bottom: 0; opacity: 0; } to { bottom: 100px; opacity: 1; } }
+    @keyframes fadeout { from { bottom: 100px; opacity: 1; } to { bottom: 0; opacity: 0; } }
   </style>
 </head>
 
@@ -170,26 +177,28 @@
 
   <nav id="nav-menu">
     <div class="nav-container">
-      <div style="color: var(--accent); padding: 10px 25px; font-family: 'Archivo Black'; font-size: 0.7rem;">BASECAMP HQ</div>
+      <div class="nav-section">Basecamp HQ</div>
       <a href="#" onclick="showView('home')">🏠 Home Base</a>
       <a href="#" onclick="showView('reference')">📜 Creeds & Prayers</a>
-      <div style="color: var(--accent); padding: 20px 25px 10px 25px; font-family: 'Archivo Black'; font-size: 0.7rem;">WAYPOINTS</div>
+      
+      <div class="nav-section">The Waypoints</div>
       <a href="#" onclick="loadLesson(0)">Waypoint 1: Trailhead</a>
-      <a href="#" onclick="loadLesson(1)">Waypoint 2</a>
-      <a href="#" onclick="loadLesson(2)">Waypoint 3</a>
-      <a href="#" onclick="loadLesson(3)">Waypoint 4</a>
-      <a href="#" onclick="loadLesson(4)">Waypoint 5</a>
-      <a href="#" onclick="loadLesson(5)">Waypoint 6</a>
-      <a href="#" onclick="loadLesson(6)">Waypoint 7</a>
-      <a href="#" onclick="loadLesson(7)">Waypoint 8</a>
-      <a href="#" onclick="loadLesson(8)">Waypoint 9</a>
-      <a href="#" onclick="loadLesson(9)">Waypoint 10</a>
-      <a href="#" onclick="loadLesson(10)">Waypoint 11</a>
-      <a href="#" onclick="loadLesson(11)">Waypoint 12</a>
-      <a href="#" onclick="loadLesson(12)">Waypoint 13</a>
-      <a href="#" onclick="loadLesson(13)">Waypoint 14</a>
-      <a href="#" onclick="loadLesson(14)">Waypoint 15</a>
-      <a href="#" onclick="loadLesson(15)">Waypoint 16</a>
+      <a href="#" onclick="loadLesson(1)">Waypoint 2: Ranger Station</a>
+      <a href="#" onclick="loadLesson(2)">Waypoint 3: Mountain Overlook</a>
+      <a href="#" onclick="loadLesson(3)">Waypoint 4: High Stakes Path</a>
+      <a href="#" onclick="loadLesson(4)">Waypoint 5: Weathering Storms</a>
+      <a href="#" onclick="loadLesson(5)">Waypoint 6: Finding Shelter</a>
+      <a href="#" onclick="loadLesson(6)">Waypoint 7: The Safety Line</a>
+      <a href="#" onclick="loadLesson(7)">Waypoint 8: The Right Gear</a>
+      <a href="#" onclick="loadLesson(8)">Waypoint 9: Perfect Guide</a>
+      <a href="#" onclick="loadLesson(9)">Waypoint 10: The Ranger's Handbook</a>
+      <a href="#" onclick="loadLesson(10)">Waypoint 11: True North</a>
+      <a href="#" onclick="loadLesson(11)">Waypoint 12: The Trail Code</a>
+      <a href="#" onclick="loadLesson(12)">Waypoint 13: Comm Check</a>
+      <a href="#" onclick="loadLesson(13)">Waypoint 14: Resupply</a>
+      <a href="#" onclick="loadLesson(14)">Waypoint 15: Signs and Provision</a>
+      <a href="#" onclick="loadLesson(15)">Waypoint 16: Homeward Bound</a>
+      <div style="height: 50px;"></div>
     </div>
   </nav>
 
@@ -197,7 +206,7 @@
     <h1>Basecamp HQ</h1>
     <div class="card">
       <h2>Welcome, Scout</h2>
-      <p>Select a <strong>Waypoint</strong> from the menu to begin your training mission.</p>
+      <p>Ready to hit the trail? Select a <strong>Waypoint</strong> from the menu to begin your training mission.</p>
       <button class="btn" onclick="loadLesson(0)">Start Waypoint 1</button>
     </div>
   </div>
@@ -206,8 +215,9 @@
     <h1>Reference Room</h1>
     <div class="card">
       <h2>The Apostle's Creed</h2>
-      <div style="text-align:left; line-height:1.6; font-family:Georgia, serif; font-size:1.1rem; white-space: pre-line;">
-        I believe in God, the Father almighty, creator of heaven and earth...
+      <div style="text-align:left; line-height:1.8; font-family:Georgia, serif; font-size:1.1rem; white-space: pre-line;">
+        I believe in God, the Father almighty, creator of heaven and earth.
+        I believe in Jesus Christ, his only Son, our Lord...
       </div>
     </div>
     <button class="btn" onclick="showView('home')">Return to HQ</button>
@@ -235,7 +245,7 @@
 
     <div class="card">
       <h3>📖 Ancient Paths</h3>
-      <p id="bible-ref-display" style="font-weight:bold; font-size: 1.2rem; color: var(--primary);"></p>
+      <p id="bible-ref-display" style="font-weight:bold; font-size: 1.3rem; color: var(--primary);"></p>
       <button class="btn" onclick="showBible()" style="background:var(--primary); width: 100%;">Open Scripture</button>
     </div>
 
@@ -247,7 +257,7 @@
 
     <div class="card" style="background: #EEEADF;">
       <h3>📓 Leader's Log</h3>
-      <textarea id="leaders-log" style="width:100%; height:100px; border:2px solid #CCC; padding:10px; border-radius:6px; font-family: inherit;" placeholder="Record observations..." oninput="saveProgress(false)"></textarea>
+      <textarea id="leaders-log" style="width:100%; height:120px; border:2px solid #CCC; padding:10px; border-radius:6px; font-family: inherit;" placeholder="Record observations..." oninput="saveProgress(false)"></textarea>
     </div>
 
     <div class="sticky-nav">
@@ -266,22 +276,22 @@
 
   <script>
     const lessons = [
-      { title: "Waypoint 1: Trailhead", bibleRef: "Genesis 1:1-2:3", flashcards: "https://quizlet.com/1156634382/flashcards", match: "https://quizlet.com/1156634382/match" },
-      { title: "Waypoint 2: Ranger Station", bibleRef: "Exodus 3", flashcards: "https://quizlet.com/1156641463/flashcards", match: "https://quizlet.com/1156641463/match" },
-      { title: "Waypoint 3: Mountain Overlook", bibleRef: "Psalm 23", flashcards: "https://quizlet.com/1156642804/flashcards", match: "https://quizlet.com/1156642804/match" },
-      { title: "Waypoint 4: High Stakes Path", bibleRef: "John 3", flashcards: "https://quizlet.com/1156643685/flashcards", match: "https://quizlet.com/1156643685/match" },
-      { title: "Waypoint 5: Weathering Storms", bibleRef: "Matthew 7", flashcards: "https://quizlet.com/1156644152/flashcards", match: "https://quizlet.com/1156644152/match" },
-      { title: "Waypoint 6: Finding Shelter", bibleRef: "Psalm 91", flashcards: "https://quizlet.com/1156645262/flashcards", match: "https://quizlet.com/1156645262/match" },
-      { title: "Waypoint 7: The Safety Line", bibleRef: "Ephesians 6", flashcards: "https://quizlet.com/1156646027/flashcards", match: "https://quizlet.com/1156646027/match" },
-      { title: "Waypoint 8: The Right Gear", bibleRef: "Romans 12", flashcards: "https://quizlet.com/1156646628/flashcards", match: "https://quizlet.com/1156646628/match" },
-      { title: "Waypoint 9: Perfect Guide", bibleRef: "John 14", flashcards: "https://quizlet.com/1156647931/flashcards", match: "https://quizlet.com/1156647931/match" },
-      { title: "Waypoint 10: The Ranger's Handbook", bibleRef: "2 Timothy 3", flashcards: "https://quizlet.com/1156650001/flashcards", match: "https://quizlet.com/1156650001/match" },
-      { title: "Waypoint 11: True North", bibleRef: "Hebrews 12", flashcards: "https://quizlet.com/1156652942/flashcards", match: "https://quizlet.com/1156652942/match" },
-      { title: "Waypoint 12: The Trail Code", bibleRef: "Exodus 20", flashcards: "https://quizlet.com/1156654407/flashcards", match: "https://quizlet.com/1156654407/match" },
-      { title: "Waypoint 13: Comm Check", bibleRef: "Philippians 4", flashcards: "https://quizlet.com/1156658068/flashcards", match: "https://quizlet.com/1156658068/match" },
-      { title: "Waypoint 14: Resupply", bibleRef: "Matthew 6", flashcards: "https://quizlet.com/1156659223/flashcards", match: "https://quizlet.com/1156659223/match" },
-      { title: "Waypoint 15: Signs and Provision", bibleRef: "John 6", flashcards: "https://quizlet.com/1156660346/flashcards", match: "https://quizlet.com/1156660346/match" },
-      { title: "Waypoint 16: Homeward Bound", bibleRef: "Revelation 21", flashcards: "https://quizlet.com/1156660947/flashcards", match: "https://quizlet.com/1156660947/match" }
+      { title: "Waypoint 1: Trailhead", bibleRef: "Genesis 1:1-2:3", flashcards: "https://quizlet.com/1156634382/flashcards", match: "https://quizlet.com/1156634382/match", video: "" },
+      { title: "Waypoint 2: Ranger Station", bibleRef: "Exodus 3", flashcards: "https://quizlet.com/1156641463/flashcards", match: "https://quizlet.com/1156641463/match", video: "" },
+      { title: "Waypoint 3: Mountain Overlook", bibleRef: "Psalm 23", flashcards: "https://quizlet.com/1156642804/flashcards", match: "https://quizlet.com/1156642804/match", video: "" },
+      { title: "Waypoint 4: High Stakes Path", bibleRef: "John 3", flashcards: "https://quizlet.com/1156643685/flashcards", match: "https://quizlet.com/1156643685/match", video: "" },
+      { title: "Waypoint 5: Weathering Storms", bibleRef: "Matthew 7", flashcards: "https://quizlet.com/1156644152/flashcards", match: "https://quizlet.com/1156644152/match", video: "" },
+      { title: "Waypoint 6: Finding Shelter", bibleRef: "Psalm 91", flashcards: "https://quizlet.com/1156645262/flashcards", match: "https://quizlet.com/1156645262/match", video: "" },
+      { title: "Waypoint 7: The Safety Line", bibleRef: "Ephesians 6", flashcards: "https://quizlet.com/1156646027/flashcards", match: "https://quizlet.com/1156646027/match", video: "" },
+      { title: "Waypoint 8: The Right Gear", bibleRef: "Romans 12", flashcards: "https://quizlet.com/1156646628/flashcards", match: "https://quizlet.com/1156646628/match", video: "" },
+      { title: "Waypoint 9: Perfect Guide", bibleRef: "John 14", flashcards: "https://quizlet.com/1156647931/flashcards", match: "https://quizlet.com/1156647931/match", video: "" },
+      { title: "Waypoint 10: The Ranger's Handbook", bibleRef: "2 Timothy 3", flashcards: "https://quizlet.com/1156650001/flashcards", match: "https://quizlet.com/1156650001/match", video: "" },
+      { title: "Waypoint 11: True North", bibleRef: "Hebrews 12", flashcards: "https://quizlet.com/1156652942/flashcards", match: "https://quizlet.com/1156652942/match", video: "" },
+      { title: "Waypoint 12: The Trail Code", bibleRef: "Exodus 20", flashcards: "https://quizlet.com/1156654407/flashcards", match: "https://quizlet.com/1156654407/match", video: "" },
+      { title: "Waypoint 13: Comm Check", bibleRef: "Philippians 4", flashcards: "https://quizlet.com/1156658068/flashcards", match: "https://quizlet.com/1156658068/match", video: "" },
+      { title: "Waypoint 14: Resupply", bibleRef: "Matthew 6", flashcards: "https://quizlet.com/1156659223/flashcards", match: "https://quizlet.com/1156659223/match", video: "" },
+      { title: "Waypoint 15: Signs and Provision", bibleRef: "John 6", flashcards: "https://quizlet.com/1156660346/flashcards", match: "https://quizlet.com/1156660346/match", video: "" },
+      { title: "Waypoint 16: Homeward Bound", bibleRef: "Revelation 21", flashcards: "https://quizlet.com/1156660947/flashcards", match: "https://quizlet.com/1156660947/match", video: "" }
     ];
 
     let currentIdx = 0;
@@ -304,7 +314,6 @@
       document.getElementById('link-flashcards').href = l.flashcards;
       document.getElementById('link-match').href = l.match;
 
-      // Handle button visibility
       document.getElementById('prev-btn').style.visibility = idx === 0 ? 'hidden' : 'visible';
       document.getElementById('next-btn').style.visibility = idx === lessons.length - 1 ? 'hidden' : 'visible';
 
@@ -343,12 +352,12 @@
       const modalBody = document.getElementById('modal-body');
       modal.style.display = 'block';
       document.getElementById('modal-ref').innerText = l.bibleRef;
-      modalBody.innerHTML = "<p>Unrolling scroll...</p>";
+      modalBody.innerHTML = "<p style='text-align:center;'>📜 Unrolling the scroll...</p>";
       try {
         const res = await fetch(`https://bible-api.com/${l.bibleRef}?translation=web`);
         const data = await res.json();
-        modalBody.innerHTML = `<div style="text-align:left; font-family:serif; font-size:1.2rem;">${data.text}</div>`;
-      } catch (e) { modalBody.innerHTML = "Error loading scripture."; }
+        modalBody.innerHTML = `<div style="text-align:left; font-family:serif; font-size:1.2rem; line-height:1.6;">${data.text}</div>`;
+      } catch (e) { modalBody.innerHTML = "Trail blocked. Check connection."; }
     }
 
     function closeBibleModal() { document.getElementById('bibleModal').style.display = 'none'; }
