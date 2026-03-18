@@ -30,26 +30,26 @@
 
     /* Header Container */
     .header-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: var(--header-height);
-  background: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  z-index: 900;
-  overflow: hidden; /* Prevents any image bleed */
-}
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--header-height);
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 900;
+      overflow: hidden;
+    }
 
-.header-img {
-  width: 100%;      /* Forces image to span the full screen width */
-  height: 100%;     /* Fills the 80px height */
-  object-fit: contain;  /* Ensures the logo isn't cropped or stretched */
-  display: block;
-}
+    .header-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
 
     .menu-btn {
       position: fixed;
@@ -67,26 +67,40 @@
       box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
     }
 
-    /* NAVIGATION MENU */
+    /* NAVIGATION MENU - REVISED FOR STABILITY */
     #nav-menu {
       position: fixed;
       top: 0;
       left: -100%;
       width: 85%;
       max-width: 320px;
-      height: 100dvh;
+      height: 100dvh; /* Dynamic height for mobile */
       background: var(--primary);
       z-index: 1000;
       transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      padding-top: 90px;
-      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 10px 0 20px rgba(0, 0, 0, 0.4);
     }
 
     #nav-menu.active { left: 0; }
 
+    .nav-container {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-top: 90px;
+    }
+
+    /* The Buffer Fix */
+    .menu-footer-buffer {
+      height: 120px;
+      width: 100%;
+    }
+
     #nav-menu a {
       display: block;
-      padding: 15px 25px;
+      padding: 18px 25px;
       color: var(--bg);
       text-decoration: none;
       font-weight: 700;
@@ -131,7 +145,6 @@
     h2 { font-family: 'Alfa Slab One', cursive; color: var(--secondary); font-size: 1.2rem; margin-bottom: 10px; }
     h3 { font-family: 'Alfa Slab One', cursive; color: var(--secondary); font-size: 0.85rem; text-transform: uppercase; margin-bottom: 15px; }
 
-    /* VIDEO & CHECKLIST */
     .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; border: 4px solid var(--primary); background: #000; margin-bottom: 10px; }
     .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
     
@@ -142,7 +155,6 @@
     .activity-btn { display: flex; align-items: center; justify-content: center; background: var(--bg); border: 2px solid var(--primary); color: var(--primary); text-decoration: none; padding: 16px; margin: 10px 0; border-radius: 8px; font-family: 'Archivo Black', sans-serif; font-size: 0.85rem; box-shadow: 0 4px 0 var(--primary); }
     .btn { background: var(--secondary); color: var(--bg); padding: 14px 24px; border-radius: 4px; font-family: 'Archivo Black', sans-serif; text-transform: uppercase; border: none; cursor: pointer; box-shadow: 0 4px 0 #8A452A; text-decoration: none; display: inline-block; }
 
-    /* STICKY NAV */
     .sticky-nav {
       position: fixed;
       bottom: 0;
@@ -159,7 +171,6 @@
 
     .nav-btn { flex: 1; margin: 0 5px; font-size: 0.8rem; }
 
-    /* MODAL & TOAST */
     .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(45, 71, 57, 0.9); }
     .modal-content { background: var(--bg); margin: 10% auto; padding: 25px; width: 90%; max-width: 500px; border: 4px solid var(--primary); border-radius: 8px; max-height: 75vh; overflow-y: auto; }
     #toast { visibility: hidden; min-width: 200px; background-color: var(--primary); color: var(--accent); text-align: center; padding: 15px; position: fixed; z-index: 3000; bottom: 100px; left: 50%; transform: translateX(-50%); font-family: 'Archivo Black', sans-serif; border-radius: 6px; }
@@ -201,7 +212,8 @@
       <a href="#" onclick="loadLesson(13)">Waypoint 14: Resupply</a>
       <a href="#" onclick="loadLesson(14)">Waypoint 15: Signs and Provision</a>
       <a href="#" onclick="loadLesson(15)">Waypoint 16: Homeward Bound</a>
-      <div style="height: 50px;"></div>
+      
+      <div class="menu-footer-buffer"></div>
     </div>
   </nav>
 
