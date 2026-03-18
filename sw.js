@@ -1,18 +1,25 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2868
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+const cacheName = 'basecamp-v1';
+const assets = [
+  './',
+  './index.html',
+  './manifest.json',
+  './images/header.png',
+  './images/icon-192.png',
+  './images/icon-512.png'
+];
 
-\f0\fs24 \cf0 self.addEventListener('install', (e) => \{\
-  e.waitUntil(\
-    caches.open('v1').then((cache) => cache.addAll(['index.html']))\
-  );\
-\});\
-\
-self.addEventListener('fetch', (e) => \{\
-  e.respondWith(\
-    caches.match(e.request).then((res) => res || fetch(e.request))\
-  );\
-\});}
+self.addEventListener('install', e => {
+  e.waitUntil(
+    caches.open(cacheName).then(cache => {
+      return cache.addAll(assets);
+    })
+  );
+});
+
+self.addEventListener('fetch', e => {
+  e.respondWith(
+    caches.match(e.request).then(response => {
+      return response || fetch(e.request);
+    })
+  );
+});
