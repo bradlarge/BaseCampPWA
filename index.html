@@ -535,11 +535,25 @@
       modal.style.display = 'block';
       document.getElementById('modal-ref').innerText = l.bibleRef;
       modalBody.innerHTML = "<p style='text-align:center;'>📜 Unrolling the scroll...</p>";
+
       try {
         const res = await fetch(`https://bible-api.com/${l.bibleRef}?translation=web`);
         const data = await res.json();
-        modalBody.innerHTML = `<div style="text-align:left; font-family:serif; font-size:1.2rem; line-height:1.6;">${data.text}</div>`;
-      } catch (e) { modalBody.innerHTML = "Trail blocked. Check connection."; }
+
+        // Check if verses exist in the response
+        if (data.verses && data.verses.length > 0) {
+          // Map through each verse and add a small superscript-style number
+          const formattedText = data.verses.map(v => {
+            return `<span style="color: var(--secondary); font-size: 0.8rem; font-weight: bold; margin-right: 4px; vertical-align: top;">${v.verse}</span>${v.text}`;
+          }).join(' ');
+
+          modalBody.innerHTML = `<div style="text-align:left; font-family:serif; font-size:1.1rem; line-height:1.7;">${formattedText}</div>`;
+        } else {
+          modalBody.innerHTML = `<div style="text-align:left; font-family:serif; font-size:1.1rem; line-height:1.6;">${data.text}</div>`;
+        }
+      } catch (e) {
+        modalBody.innerHTML = "Trail blocked. Check your connection to the Ranger Station (internet).";
+      }
     }
 
     function closeBibleModal() { document.getElementById('bibleModal').style.display = 'none'; }
@@ -548,4 +562,3 @@
 </body>
 
 </html>
-
