@@ -18,7 +18,6 @@
       --neutral: #4A4A4A;
       --bg: #F9F7F2;
       --white: #FFFFFF;
-      /* CROPPED HEIGHT: Reduced from 80px to 40px */
       --header-height: 80px;
     }
 
@@ -32,7 +31,6 @@
       overflow-x: hidden;
     }
 
-    /* Header Container */
     .header-container {
       position: fixed;
       top: 0;
@@ -50,35 +48,27 @@
 
     .header-img {
       width: 100%;
-      /* Forces width to screen edges */
       height: 100%;
-      /* Forces height to the new 40px limit */
       object-fit: cover;
-      /* CROPS the image to fill the space without gaps */
       object-position: center;
-      /* Ensures the middle of your logo stays visible */
       display: block;
     }
 
     .menu-btn {
       position: fixed;
       top: 5px;
-      /* Moved up to center within the 40px height */
       left: 10px;
       background: var(--primary);
       color: var(--accent);
       border: 2px solid var(--accent);
       padding: 4px 10px;
-      /* Slimmer padding for a smaller header */
       border-radius: 4px;
       cursor: pointer;
       z-index: 1001;
       font-family: 'Archivo Black', sans-serif;
       font-size: 1rem;
-      /* Slightly smaller text */
     }
 
-    /* NAVIGATION MENU - REVISED FOR STABILITY */
     #nav-menu {
       position: fixed;
       top: 0;
@@ -86,7 +76,6 @@
       width: 85%;
       max-width: 320px;
       height: 100dvh;
-      /* Dynamic height for mobile */
       background: var(--primary);
       z-index: 1000;
       transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -106,7 +95,6 @@
       padding-top: 90px;
     }
 
-    /* The Buffer Fix */
     .menu-footer-buffer {
       height: 120px;
       width: 100%;
@@ -121,11 +109,6 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    #nav-menu a.current-waypoint {
-      background: var(--secondary);
-      border-left: 5px solid var(--accent);
-    }
-
     .nav-section {
       color: var(--accent);
       padding: 20px 25px 5px 25px;
@@ -135,7 +118,6 @@
       letter-spacing: 1px;
     }
 
-    /* VIEW LAYOUT */
     .view {
       display: none;
       padding: 20px 15px 120px 15px;
@@ -331,7 +313,6 @@
       border: 3px solid var(--secondary);
       background: #fdf2f0;
       transform: rotate(-10deg);
-      /* Gives it that hand-stamped look */
       transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
@@ -343,29 +324,8 @@
       text-transform: uppercase;
     }
 
-    @keyframes fadein {
-      from {
-        bottom: 0;
-        opacity: 0;
-      }
-
-      to {
-        bottom: 100px;
-        opacity: 1;
-      }
-    }
-
-    @keyframes fadeout {
-      from {
-        bottom: 100px;
-        opacity: 1;
-      }
-
-      to {
-        bottom: 0;
-        opacity: 0;
-      }
-    }
+    @keyframes fadein { from { bottom: 0; opacity: 0; } to { bottom: 100px; opacity: 1; } }
+    @keyframes fadeout { from { bottom: 100px; opacity: 1; } to { bottom: 0; opacity: 0; } }
   </style>
 </head>
 
@@ -412,13 +372,11 @@
     <h1>Basecamp HQ</h1>
     <div class="card">
       <h2>Welcome, Scout</h2>
-
       <div class="video-container" style="margin-bottom: 20px;">
         <iframe id="welcome-video" src="https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE"
           allow="autoplay; encrypted-media" allowfullscreen>
         </iframe>
       </div>
-
       <p>Ready to hit the trail? Select a <strong>Waypoint</strong> from the menu to begin your training mission.</p>
       <button class="btn" onclick="loadLesson(0)">Start Waypoint 1</button>
     </div>
@@ -428,8 +386,7 @@
     <h1>Scout Passport</h1>
     <div class="card">
       <p>Earn a Stamp for every Waypoint you complete!</p>
-      <div id="passport-grid"
-        style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px;">
+      <div id="passport-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px;">
       </div>
     </div>
     <button class="btn" onclick="showView('home')" style="background: var(--neutral);">Return to HQ</button>
@@ -439,50 +396,8 @@
     <h1>Reference Room</h1>
     <div class="card">
       <h2>The Lord's Prayer</h2>
-      <div
-        style="text-align:left; line-height:1.8; font-family:Georgia, serif; font-size:1.1rem; white-space: pre-line;">
-        Our Father who art in heaven,
-        Hallowed be Thy name.
-        Thy kingdom come,
-        Thy will be done,
-        On earth,
-        As it is in heaven.
-        Give us this day our daily bread.
-        And forgive us our trespasses,
-        as we forgive those who trespass against us.
-        And lead us not into temptation,
-        But deliver us from evil:
-        For thine is the kingdom,
-        And the power, and the glory,
-        Forever. Amen.
-      </div>
-    </div>
-    <div class="card">
-      <h2>The Apostle's Creed</h2>
-      <div
-        style="text-align:left; line-height:1.8; font-family:Georgia, serif; font-size:1.1rem; white-space: pre-line;">
-        I believe in God, the Father almighty,
-        creator of heaven and earth.
-
-        I believe in Jesus Christ, his only Son, our Lord,
-        who was conceived by the Holy Spirit
-        and born of the virgin Mary.
-        He suffered under Pontius Pilate,
-        was crucified, died, and was buried;
-        he descended to hell.
-        The third day he rose again from the dead.
-        He ascended to heaven
-        and is seated at the right hand of God the Father almighty.
-        From there he will come to judge the living and the dead.
-
-        I believe in the Holy Spirit,
-        the holy catholic* church,
-        the communion of saints,
-        the forgiveness of sins,
-        the resurrection of the body,
-        and the life everlasting. Amen.
-
-        *that is, the true Christian church of all times and all places
+      <div style="text-align:left; line-height:1.8; font-family:Georgia, serif; font-size:1.1rem; white-space: pre-line;">
+        Our Father who art in heaven, Hallowed be Thy name...
       </div>
     </div>
     <button class="btn" onclick="showView('home')">Return to HQ</button>
@@ -496,12 +411,8 @@
         style="width: 80%; padding: 12px; border-radius: 4px; border: none; font-family: inherit;">
       <button class="btn" onclick="addPrayer()" style="margin-top: 10px; width: 90%;">LOG REQUEST</button>
     </div>
-
-    <div id="prayer-list-container">
-    </div>
-
-    <button class="btn" onclick="showView('home')" style="background: var(--neutral); margin-top: 20px;">Return to
-      HQ</button>
+    <div id="prayer-list-container"></div>
+    <button class="btn" onclick="showView('home')" style="background: var(--neutral); margin-top: 20px;">Return to HQ</button>
   </div>
 
   <div id="view-lesson" class="view">
@@ -526,8 +437,9 @@
 
     <div class="card">
       <h3>📖 Ancient Paths</h3>
+      <h4 id="bible-story-title" style="font-family: 'Alfa Slab One', cursive; color: var(--primary); margin: 10px 0; font-size: 1.1rem;"></h4>
       <div id="bible-link-container"
-        style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 10px;"></div>
+        style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;"></div>
     </div>
 
     <div class="card">
@@ -546,46 +458,61 @@
     </div>
 
     <div class="sticky-nav">
-      <button class="btn nav-btn" id="prev-btn" onclick="prevLesson()" style="background: var(--neutral);">⬅
-        BACK</button>
+      <button class="btn nav-btn" id="prev-btn" onclick="prevLesson()" style="background: var(--neutral);">⬅ BACK</button>
       <button class="btn nav-btn" id="next-btn" onclick="nextLesson()">NEXT ➡</button>
     </div>
   </div>
 
   <div id="bibleModal" class="modal">
     <div class="modal-content">
-      <h2 id="modal-ref"></h2>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 2px solid var(--primary); padding-bottom: 10px;">
+        <h2 id="modal-ref" style="margin: 0; font-size: 1.2rem;"></h2>
+        <select id="translation-selector" onchange="changeTranslation()" style="padding: 5px; border-radius: 4px; font-family: sans-serif;">
+          <option value="web">WEB (Modern)</option>
+          <option value="bsb">BSB (Modern / ESV Style)</option>
+          <option value="kjv">KJV (Classic)</option>
+          <option value="asv">ASV (Literal / NASB Style)</option>
+          <option value="bbe">BBE (Children's / Basic)</option>
+        </select>
+      </div>
       <div id="modal-body"></div>
       <button class="btn" style="width:100%; margin-top:20px;" onclick="closeBibleModal()">Done Reading</button>
     </div>
   </div>
 
   <script>
+    let currentBibleRef = "";
+    let currentIdx = 0;
+
     const lessons = [
       {
         title: "Waypoint 1: Trailhead",
-        bibleRef: ["Genesis 1:1-25", "Genesis 1:26-31", "Genesis 2:1-3", "Exodus 15:1-21", "Exodus 15:22-27", "Exodus 16:1-35"],
+        bibleStory: "The Beginning of All Things",
+        bibleRef: ["Genesis 1:1-25", "Genesis 1:26-31", "Genesis 2:1-3", "Exodus 15:1-21"],
         flashcards: "https://quizlet.com/1156634382/flashcards",
         match: "https://quizlet.com/1156634382/match",
         video: ""
       },
       {
         title: "Waypoint 2: Ranger Station",
-        bibleRef: "Exodus 3",
+        bibleStory: "The Burning Bush",
+        bibleRef: ["Exodus 3:1-10", "Exodus 3:11-22"],
         flashcards: "https://quizlet.com/1156641463/flashcards",
         match: "https://quizlet.com/1156641463/match",
         video: ""
       },
       {
         title: "Waypoint 3: Mountain Overlook",
-        bibleRef: "Psalm 23",
+        bibleStory: "The Shepherd's Song",
+        bibleRef: ["Psalm 23"],
         flashcards: "https://quizlet.com/1156642804/flashcards",
         match: "https://quizlet.com/1156642804/match",
         video: ""
       },
       {
         title: "Waypoint 4: High Stakes Path",
-        bibleRef: "John 3",
+        bibleStory: "The Teacher at Night",
+        bibleRef: ["John 3:1-16", "John 3:17-21"],
         flashcards: "https://quizlet.com/1156643685/flashcards",
         match: "https://quizlet.com/1156643685/match",
         video: ""
@@ -604,11 +531,12 @@
       { title: "Waypoint 16: Homeward Bound", bibleRef: "Revelation 21", flashcards: "https://quizlet.com/1156660947/flashcards", match: "https://quizlet.com/1156660947/match", video: "" }
     ];
 
-    let currentIdx = 0;
-
     function toggleMenu() { document.getElementById('nav-menu').classList.toggle('active'); }
 
     function showView(viewId) {
+      // Save the current view so we can return here on refresh
+      localStorage.setItem('last_view', viewId);
+
       document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
       document.getElementById('view-' + viewId).classList.add('active');
       if (document.getElementById('nav-menu').classList.contains('active')) toggleMenu();
@@ -617,47 +545,40 @@
 
     function loadLesson(idx) {
       currentIdx = idx;
+      localStorage.setItem('last_lesson_idx', idx); // Save which waypoint we are on
+  
       const l = lessons[idx];
-
-      // 1. Update the Main Titles and Video
       document.getElementById('lesson-title').innerText = l.title;
       document.getElementById('lesson-video').src = l.video ? `https://www.youtube.com/embed/${l.video}` : "";
       document.getElementById('link-flashcards').href = l.flashcards;
       document.getElementById('link-match').href = l.match;
+      
+      // Update Story Title
+      document.getElementById('bible-story-title').innerText = l.bibleStory || "";
 
-      // 2. NEW BIBLE LINK GENERATOR
       const container = document.getElementById('bible-link-container');
-      container.innerHTML = ""; // Clear out the old buttons
-
-      // Turn the reference into an array if it isn't one already
+      container.innerHTML = "";
       const refs = Array.isArray(l.bibleRef) ? l.bibleRef : [l.bibleRef];
-
-      // Create a button for every verse in the list
       refs.forEach(ref => {
         const btn = document.createElement('button');
         btn.innerText = ref;
         btn.className = "btn";
         btn.style.width = "100%";
-        btn.style.marginBottom = "8px"; // Spacing between buttons
+        btn.style.marginBottom = "8px";
         btn.style.background = "var(--primary)";
-        // Calls your specificRef function
         btn.onclick = () => showBible(ref);
         container.appendChild(btn);
       });
 
-      // 3. Handle Navigation Button Visibility
       document.getElementById('prev-btn').style.visibility = idx === 0 ? 'hidden' : 'visible';
       document.getElementById('next-btn').style.visibility = idx === lessons.length - 1 ? 'hidden' : 'visible';
 
-      // 4. Load Saved Progress (Checkboxes & Log)
       const saved = JSON.parse(localStorage.getItem(`basecamp_w${idx}`) || '{}');
       document.getElementById('check-video').checked = saved.v || false;
       document.getElementById('check-bible').checked = saved.b || false;
       document.getElementById('check-study').checked = saved.s || false;
       document.getElementById('check-match').checked = saved.m || false;
       document.getElementById('leaders-log').value = saved.l || "";
-
-      // 5. Switch to the Lesson View
       showView('lesson');
     }
 
@@ -680,155 +601,113 @@
       }
     }
 
-    async function showBible(specificRef) {
-      const modal = document.getElementById('bibleModal');
-      const modalBody = document.getElementById('modal-body');
+   async function showBible(specificRef) {
+  currentBibleRef = specificRef;
+  const modal = document.getElementById('bibleModal');
+  const modalBody = document.getElementById('modal-body');
+  const selector = document.getElementById('translation-selector');
 
-      // Open the modal immediately and show loading state
-      modal.style.display = 'block';
-      document.getElementById('modal-ref').innerText = specificRef;
-      modalBody.innerHTML = "<p style='text-align:center; font-family:sans-serif; color:var(--neutral);'>📜 Unrolling the scroll...</p>";
+  // Load preference from memory
+  const savedTrans = localStorage.getItem('preferred_translation');
+  if (savedTrans) selector.value = savedTrans;
 
-      try {
-        const res = await fetch(`https://bible-api.com/${specificRef}?translation=web`);
-        const data = await res.json();
+  const translation = selector.value;
+  modal.style.display = 'block';
+  document.getElementById('modal-ref').innerText = specificRef;
+  modalBody.innerHTML = "<p style='text-align:center; font-family:sans-serif;'>📜 Unrolling the scroll...</p>";
 
-        if (data.verses && data.verses.length > 0) {
-          // Formats each verse with a distinct superscript-style number
-          const formattedText = data.verses.map(v => {
-            return `<span style="color: var(--secondary); font-size: 0.9rem; font-weight: bold; margin-right: 6px; vertical-align: super;">${v.verse}</span>${v.text}`;
-          }).join(' ');
+  // --- LOGIC SPLIT ---
+  if (translation === 'bsb') {
+    // USE THE NEW API FOR BEREAN STANDARD
+    try {
+      const parts = specificRef.match(/([\d\s]*[a-zA-Z]+)\s+(\d+):?(\d+)?-?(\d+)?/);
+      const book = parts[1].trim().replace(/\s+/g, '');
+      const chapter = parts[2];
+      const res = await fetch(`https://bible.helloao.org/api/BSB/${book}/${chapter}.json`);
+      const data = await res.json();
 
-          // The Readability Wrapper: 
-          // 1.3rem (~20pt) size, Georgia/Serif font, and 1.6 line-height for mobile clarity
-          modalBody.innerHTML = `
-        <div style="
-          text-align: left; 
-          font-family: 'Georgia', serif; 
-          font-size: 1.3rem; 
-          line-height: 1.6; 
-          color: #222; 
-          padding: 10px 5px;
-          letter-spacing: 0.01rem;
-        ">
-          ${formattedText}
-        </div>`;
-        } else {
-          modalBody.innerHTML = "<p style='text-align:center;'>Reference not found. Please check the Waypoint data.</p>";
-        }
-      } catch (e) {
-        modalBody.innerHTML = "<p style='text-align:center;'>Trail blocked. Check your connection to the Ranger Station (internet).</p>";
+      if (data.chapter && data.chapter.content) {
+        const startV = parseInt(parts[3]) || 1;
+        const endV = parseInt(parts[4]) || (parts[3] ? startV : 999);
+        const verses = data.chapter.content
+          .filter(item => item.type === 'verse')
+          .filter(v => v.number >= startV && v.number <= endV);
+
+        const formattedText = verses.map(v => {
+          const text = v.content.map(c => typeof c === 'string' ? c : (c.content || "")).join('');
+          return `<span style="color:var(--secondary);font-size:0.9rem;font-weight:bold;margin-right:6px;vertical-align:super;">${v.number}</span>${text}`;
+        }).join(' ');
+        modalBody.innerHTML = `<div style="text-align:left;font-family:Georgia,serif;font-size:1.3rem;line-height:1.6;color:#222;padding:10px 5px;">${formattedText}</div>`;
+      }
+    } catch (e) {
+      modalBody.innerHTML = "<p style='text-align:center;'>BSB temporary trail block. Try WEB translation.</p>";
+    }
+  } else {
+    // USE THE ORIGINAL API FOR EVERYTHING ELSE (WEB, KJV, ASV, BBE)
+    try {
+      const res = await fetch(`https://bible-api.com/${specificRef}?translation=${translation}`);
+      const data = await res.json();
+      if (data.verses && data.verses.length > 0) {
+        const formattedText = data.verses.map(v => 
+          `<span style="color:var(--secondary);font-size:0.9rem;font-weight:bold;margin-right:6px;vertical-align:super;">${v.verse}</span>${v.text}`
+        ).join(' ');
+        modalBody.innerHTML = `<div style="text-align:left;font-family:Georgia,serif;font-size:1.3rem;line-height:1.6;color:#222;padding:10px 5px;">${formattedText}</div>`;
+      } else {
+        modalBody.innerHTML = "<p style='text-align:center;'>Reference not found.</p>";
+      }
+    } catch (e) {
+      modalBody.innerHTML = "<p style='text-align:center;'>Trail blocked. Check connection.</p>";
+    }
+  }
+}
+    function changeTranslation() {
+      if (currentBibleRef) {
+        localStorage.setItem('preferred_translation', document.getElementById('translation-selector').value);
+        showBible(currentBibleRef);
       }
     }
 
     function closeBibleModal() { document.getElementById('bibleModal').style.display = 'none'; }
     window.onload = () => { showView('home'); };
 
-    // Initial load of prayers from storage
+    // Prayer Log Logic
     let prayers = JSON.parse(localStorage.getItem('basecamp_prayers') || '[]');
-
     function addPrayer() {
       const input = document.getElementById('prayer-input');
       if (input.value.trim() === "") return;
-
-      const newPrayer = {
-        id: Date.now(),
-        text: input.value,
-        answered: false,
-        date: new Date().toLocaleDateString()
-      };
-
-      prayers.unshift(newPrayer); // Add to top of list
+      prayers.unshift({ id: Date.now(), text: input.value, answered: false, date: new Date().toLocaleDateString() });
       input.value = "";
       saveAndRender();
     }
-
-    function toggleAnswered(id) {
-      prayers = prayers.map(p => {
-        if (p.id === id) p.answered = !p.answered;
-        return p;
-      });
-      saveAndRender();
-    }
-
-    function deletePrayer(id) {
-      if (confirm("Remove this entry from the log?")) {
-        prayers = prayers.filter(p => p.id !== id);
-        saveAndRender();
-      }
-    }
-
-    function saveAndRender() {
-      localStorage.setItem('basecamp_prayers', JSON.stringify(prayers));
-      renderPrayers();
-    }
-
+    function toggleAnswered(id) { prayers = prayers.map(p => { if (p.id === id) p.answered = !p.answered; return p; }); saveAndRender(); }
+    function deletePrayer(id) { if (confirm("Delete entry?")) { prayers = prayers.filter(p => p.id !== id); saveAndRender(); } }
+    function saveAndRender() { localStorage.setItem('basecamp_prayers', JSON.stringify(prayers)); renderPrayers(); }
     function renderPrayers() {
       const container = document.getElementById('prayer-list-container');
-      container.innerHTML = "";
-
-      if (prayers.length === 0) {
-        container.innerHTML = "<p style='color:var(--neutral); opacity:0.6;'>Your journal is empty. Add your first request above.</p>";
-        return;
-      }
-
+      container.innerHTML = prayers.length === 0 ? "<p>Journal is empty.</p>" : "";
       prayers.forEach(p => {
         const card = document.createElement('div');
         card.className = "card";
-
-        // Apply Gold Styling if Answered
-        if (p.answered) {
-          card.style.border = "2px solid var(--accent)";
-          card.style.background = "#FFF9E6"; // Soft gold wash
-        }
-
-        card.innerHTML = `
-      <div style="text-align: left;">
-        <small style="color: var(--neutral); opacity: 0.7;">${p.date}</small>
-        <p style="font-size: 1.1rem; font-weight: 700; margin: 8px 0; color: ${p.answered ? '#B8860B' : 'var(--primary)'};">
-          ${p.answered ? '⭐ ' : ''}${p.text}
-        </p>
-        <div style="display: flex; gap: 10px; margin-top: 10px;">
-          <button onclick="toggleAnswered(${p.id})" style="flex: 2; padding: 8px; font-size: 0.7rem; border-radius: 4px; border: 1px solid var(--primary); background: ${p.answered ? 'var(--accent)' : 'white'}; font-family: 'Archivo Black';">
-            ${p.answered ? 'ANSWERED' : 'MARK ANSWERED'}
-          </button>
-          <button onclick="deletePrayer(${p.id})" style="flex: 1; padding: 8px; font-size: 0.7rem; background: #eee; border: 1px solid #ccc; border-radius: 4px;">🗑️</button>
-        </div>
-      </div>
-    `;
+        if (p.answered) card.style.background = "#FFF9E6";
+        card.innerHTML = `<small>${p.date}</small><p style="font-weight:700;color:${p.answered?'#B8860B':'var(--primary)'}">${p.answered?'⭐ ':''}${p.text}</p><button onclick="toggleAnswered(${p.id})">${p.answered?'ANSWERED':'MARK ANSWERED'}</button><button onclick="deletePrayer(${p.id})">🗑️</button>`;
         container.appendChild(card);
       });
     }
 
-    // Function to check if a specific waypoint is 100% complete
     function isWaypointComplete(idx) {
-      const saved = JSON.parse(localStorage.getItem(`basecamp_w${idx}`) || '{}');
-      // Check if all 4 mission requirements are true
-      return (saved.v && saved.b && saved.s && saved.m);
+      const s = JSON.parse(localStorage.getItem(`basecamp_w${idx}`) || '{}');
+      return s.v && s.b && s.s && s.m;
     }
-
     function renderPassport() {
       const grid = document.getElementById('passport-grid');
       grid.innerHTML = "";
-
-      lessons.forEach((lesson, idx) => {
+      lessons.forEach((l, i) => {
         const slot = document.createElement('div');
-        slot.className = "stamp-slot";
-
-        if (isWaypointComplete(idx)) {
-          slot.classList.add('stamp-active');
-          slot.innerHTML = `
-        <div class="stamp-text">
-          <div style="font-size: 3rem;">⛰️</div>
-          WAYPOINT<br>${idx + 1}
-        </div>`;
-        } else {
-          slot.innerHTML = `<span style="color:#ccc; font-size:3rem;">${idx + 1}</span>`;
-        }
+        slot.className = "stamp-slot" + (isWaypointComplete(i) ? " stamp-active" : "");
+        slot.innerHTML = isWaypointComplete(i) ? `<div class="stamp-text">⛰️<br>Waypoint ${i+1}</div>` : i+1;
         grid.appendChild(slot);
       });
     }
   </script>
 </body>
-
 </html>
