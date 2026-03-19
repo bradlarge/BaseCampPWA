@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Basecamp: Ancient Paths for Modern Travelers</title>
+  <title>Basecamp: Ancient Paths for Young Adventurers!</title>
   <link rel="manifest" href="manifest.json">
   <link
     href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Alfa+Slab+One&family=Montserrat:wght@400;700&display=swap"
@@ -290,8 +290,9 @@
       max-width: 500px;
       border: 4px solid var(--primary);
       border-radius: 8px;
-      max-height: 75vh;
+      max-height: 85vh;
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     #toast {
@@ -313,6 +314,33 @@
     #toast.show {
       visibility: visible;
       animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    .stamp-slot {
+      aspect-ratio: 1/1;
+      border: 2px dashed #ccc;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      background: #fff;
+    }
+
+    .stamp-active {
+      border: 3px solid var(--secondary);
+      background: #fdf2f0;
+      transform: rotate(-10deg);
+      /* Gives it that hand-stamped look */
+      transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .stamp-text {
+      font-family: 'Alfa Slab One', cursive;
+      font-size: 0.6rem;
+      color: var(--secondary);
+      text-align: center;
+      text-transform: uppercase;
     }
 
     @keyframes fadein {
@@ -353,8 +381,10 @@
   <nav id="nav-menu">
     <div class="nav-container">
       <div class="nav-section">Basecamp HQ</div>
-      <a href="#" onclick="showView('home')">🏠 Home Base</a>
-      <a href="#" onclick="showView('reference')">📜 Creeds & Prayers</a>
+      <a href="#" onclick="showView('home')">Home Base</a>
+      <a href="#" onclick="showView('journal'); renderPrayers();">Prayer Journal</a>
+      <a href="#" onclick="showView('passport'); renderPassport();">My Stamps</a>
+      <a href="#" onclick="showView('reference')">Creeds & Prayers</a>
 
       <div class="nav-section">The Waypoints</div>
       <a href="#" onclick="loadLesson(0)">Waypoint 1: Trailhead</a>
@@ -382,22 +412,96 @@
     <h1>Basecamp HQ</h1>
     <div class="card">
       <h2>Welcome, Scout</h2>
+
+      <div class="video-container" style="margin-bottom: 20px;">
+        <iframe id="welcome-video" src="https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE"
+          allow="autoplay; encrypted-media" allowfullscreen>
+        </iframe>
+      </div>
+
       <p>Ready to hit the trail? Select a <strong>Waypoint</strong> from the menu to begin your training mission.</p>
       <button class="btn" onclick="loadLesson(0)">Start Waypoint 1</button>
     </div>
   </div>
 
+  <div id="view-passport" class="view">
+    <h1>Scout Passport</h1>
+    <div class="card">
+      <p>Earn a Stamp for every Waypoint you complete!</p>
+      <div id="passport-grid"
+        style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px;">
+      </div>
+    </div>
+    <button class="btn" onclick="showView('home')" style="background: var(--neutral);">Return to HQ</button>
+  </div>
+
   <div id="view-reference" class="view">
     <h1>Reference Room</h1>
+    <div class="card">
+      <h2>The Lord's Prayer</h2>
+      <div
+        style="text-align:left; line-height:1.8; font-family:Georgia, serif; font-size:1.1rem; white-space: pre-line;">
+        Our Father who art in heaven,
+        Hallowed be Thy name.
+        Thy kingdom come,
+        Thy will be done,
+        On earth,
+        As it is in heaven.
+        Give us this day our daily bread.
+        And forgive us our trespasses,
+        as we forgive those who trespass against us.
+        And lead us not into temptation,
+        But deliver us from evil:
+        For thine is the kingdom,
+        And the power, and the glory,
+        Forever. Amen.
+      </div>
+    </div>
     <div class="card">
       <h2>The Apostle's Creed</h2>
       <div
         style="text-align:left; line-height:1.8; font-family:Georgia, serif; font-size:1.1rem; white-space: pre-line;">
-        I believe in God, the Father almighty, creator of heaven and earth.
-        I believe in Jesus Christ, his only Son, our Lord...
+        I believe in God, the Father almighty,
+        creator of heaven and earth.
+
+        I believe in Jesus Christ, his only Son, our Lord,
+        who was conceived by the Holy Spirit
+        and born of the virgin Mary.
+        He suffered under Pontius Pilate,
+        was crucified, died, and was buried;
+        he descended to hell.
+        The third day he rose again from the dead.
+        He ascended to heaven
+        and is seated at the right hand of God the Father almighty.
+        From there he will come to judge the living and the dead.
+
+        I believe in the Holy Spirit,
+        the holy catholic* church,
+        the communion of saints,
+        the forgiveness of sins,
+        the resurrection of the body,
+        and the life everlasting. Amen.
+
+        *that is, the true Christian church of all times and all places
       </div>
     </div>
     <button class="btn" onclick="showView('home')">Return to HQ</button>
+  </div>
+
+  <div id="view-journal" class="view">
+    <h1>Prayer Journal</h1>
+    <div class="card" style="background: var(--primary); color: var(--white);">
+      <h2 style="color: var(--accent);">📝 New Entry</h2>
+      <input type="text" id="prayer-input" placeholder="What are you bringing to God today?"
+        style="width: 80%; padding: 12px; border-radius: 4px; border: none; font-family: inherit;">
+      <button class="btn" onclick="addPrayer()" style="margin-top: 10px; width: 90%;">LOG REQUEST</button>
+    </div>
+
+    <div id="prayer-list-container">
+    </div>
+
+    <button class="btn" onclick="showView('home')" style="background: var(--neutral); margin-top: 20px;">Return to
+      HQ</button>
   </div>
 
   <div id="view-lesson" class="view">
@@ -426,7 +530,7 @@
         style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 10px;"></div>
     </div>
 
-<div class="card">
+    <div class="card">
       <h3>🎒 Training Activities</h3>
       <a id="link-flashcards" href="#" target="_blank" class="activity-btn">📝 Open Flashcards</a>
       <a id="link-match" href="#" target="_blank" class="activity-btn"
@@ -460,26 +564,32 @@
     const lessons = [
       {
         title: "Waypoint 1: Trailhead",
-        bibleRef: ["Genesis 1:1-25", "Genesis 1:26-31", "Genesis 2:1-3"],
+        bibleRef: ["Genesis 1:1-25", "Genesis 1:26-31", "Genesis 2:1-3", "Exodus 15:1-21", "Exodus 15:22-27", "Exodus 16:1-35"],
         flashcards: "https://quizlet.com/1156634382/flashcards",
         match: "https://quizlet.com/1156634382/match",
         video: ""
       },
-      { title: "Waypoint 2: Ranger Station", 
-        bibleRef: "Exodus 3", 
-        flashcards: "https://quizlet.com/1156641463/flashcards", 
-        match: "https://quizlet.com/1156641463/match", 
-        video: "" },
-      { title: "Waypoint 3: Mountain Overlook", 
-        bibleRef: "Psalm 23", 
-        flashcards: "https://quizlet.com/1156642804/flashcards", 
-        match: "https://quizlet.com/1156642804/match", 
-        video: "" },
-      { title: "Waypoint 4: High Stakes Path", 
-        bibleRef: "John 3", 
-        flashcards: "https://quizlet.com/1156643685/flashcards", 
-        match: "https://quizlet.com/1156643685/match", 
-        video: "" },
+      {
+        title: "Waypoint 2: Ranger Station",
+        bibleRef: "Exodus 3",
+        flashcards: "https://quizlet.com/1156641463/flashcards",
+        match: "https://quizlet.com/1156641463/match",
+        video: ""
+      },
+      {
+        title: "Waypoint 3: Mountain Overlook",
+        bibleRef: "Psalm 23",
+        flashcards: "https://quizlet.com/1156642804/flashcards",
+        match: "https://quizlet.com/1156642804/match",
+        video: ""
+      },
+      {
+        title: "Waypoint 4: High Stakes Path",
+        bibleRef: "John 3",
+        flashcards: "https://quizlet.com/1156643685/flashcards",
+        match: "https://quizlet.com/1156643685/match",
+        video: ""
+      },
       { title: "Waypoint 5: Weathering Storms", bibleRef: "Matthew 7", flashcards: "https://quizlet.com/1156644152/flashcards", match: "https://quizlet.com/1156644152/match", video: "" },
       { title: "Waypoint 6: Finding Shelter", bibleRef: "Psalm 91", flashcards: "https://quizlet.com/1156645262/flashcards", match: "https://quizlet.com/1156645262/match", video: "" },
       { title: "Waypoint 7: The Safety Line", bibleRef: "Ephesians 6", flashcards: "https://quizlet.com/1156646027/flashcards", match: "https://quizlet.com/1156646027/match", video: "" },
@@ -506,50 +616,50 @@
     }
 
     function loadLesson(idx) {
-  currentIdx = idx;
-  const l = lessons[idx];
-  
-  // 1. Update the Main Titles and Video
-  document.getElementById('lesson-title').innerText = l.title;
-  document.getElementById('lesson-video').src = l.video ? `https://www.youtube.com/embed/${l.video}` : "";
-  document.getElementById('link-flashcards').href = l.flashcards;
-  document.getElementById('link-match').href = l.match;
+      currentIdx = idx;
+      const l = lessons[idx];
 
-  // 2. NEW BIBLE LINK GENERATOR
-  const container = document.getElementById('bible-link-container');
-  container.innerHTML = ""; // Clear out the old buttons
+      // 1. Update the Main Titles and Video
+      document.getElementById('lesson-title').innerText = l.title;
+      document.getElementById('lesson-video').src = l.video ? `https://www.youtube.com/embed/${l.video}` : "";
+      document.getElementById('link-flashcards').href = l.flashcards;
+      document.getElementById('link-match').href = l.match;
 
-  // Turn the reference into an array if it isn't one already
-  const refs = Array.isArray(l.bibleRef) ? l.bibleRef : [l.bibleRef];
+      // 2. NEW BIBLE LINK GENERATOR
+      const container = document.getElementById('bible-link-container');
+      container.innerHTML = ""; // Clear out the old buttons
 
-  // Create a button for every verse in the list
-  refs.forEach(ref => {
-    const btn = document.createElement('button');
-    btn.innerText = ref;
-    btn.className = "btn"; 
-    btn.style.width = "100%";
-    btn.style.marginBottom = "8px"; // Spacing between buttons
-    btn.style.background = "var(--primary)";
-    // Calls your specificRef function
-    btn.onclick = () => showBible(ref); 
-    container.appendChild(btn);
-  });
+      // Turn the reference into an array if it isn't one already
+      const refs = Array.isArray(l.bibleRef) ? l.bibleRef : [l.bibleRef];
 
-  // 3. Handle Navigation Button Visibility
-  document.getElementById('prev-btn').style.visibility = idx === 0 ? 'hidden' : 'visible';
-  document.getElementById('next-btn').style.visibility = idx === lessons.length - 1 ? 'hidden' : 'visible';
+      // Create a button for every verse in the list
+      refs.forEach(ref => {
+        const btn = document.createElement('button');
+        btn.innerText = ref;
+        btn.className = "btn";
+        btn.style.width = "100%";
+        btn.style.marginBottom = "8px"; // Spacing between buttons
+        btn.style.background = "var(--primary)";
+        // Calls your specificRef function
+        btn.onclick = () => showBible(ref);
+        container.appendChild(btn);
+      });
 
-  // 4. Load Saved Progress (Checkboxes & Log)
-  const saved = JSON.parse(localStorage.getItem(`basecamp_w${idx}`) || '{}');
-  document.getElementById('check-video').checked = saved.v || false;
-  document.getElementById('check-bible').checked = saved.b || false;
-  document.getElementById('check-study').checked = saved.s || false;
-  document.getElementById('check-match').checked = saved.m || false;
-  document.getElementById('leaders-log').value = saved.l || "";
+      // 3. Handle Navigation Button Visibility
+      document.getElementById('prev-btn').style.visibility = idx === 0 ? 'hidden' : 'visible';
+      document.getElementById('next-btn').style.visibility = idx === lessons.length - 1 ? 'hidden' : 'visible';
 
-  // 5. Switch to the Lesson View
-  showView('lesson');
-}
+      // 4. Load Saved Progress (Checkboxes & Log)
+      const saved = JSON.parse(localStorage.getItem(`basecamp_w${idx}`) || '{}');
+      document.getElementById('check-video').checked = saved.v || false;
+      document.getElementById('check-bible').checked = saved.b || false;
+      document.getElementById('check-study').checked = saved.s || false;
+      document.getElementById('check-match').checked = saved.m || false;
+      document.getElementById('leaders-log').value = saved.l || "";
+
+      // 5. Switch to the Lesson View
+      showView('lesson');
+    }
 
     function nextLesson() { if (currentIdx < lessons.length - 1) loadLesson(currentIdx + 1); }
     function prevLesson() { if (currentIdx > 0) loadLesson(currentIdx - 1); }
@@ -570,32 +680,154 @@
       }
     }
 
-   async function showBible(specificRef) {
-  const modal = document.getElementById('bibleModal');
-  const modalBody = document.getElementById('modal-body');
-  modal.style.display = 'block';
-  
-  document.getElementById('modal-ref').innerText = specificRef;
-  modalBody.innerHTML = "<p style='text-align:center;'>📜 Unrolling the scroll...</p>";
+    async function showBible(specificRef) {
+      const modal = document.getElementById('bibleModal');
+      const modalBody = document.getElementById('modal-body');
 
-  try {
-    const res = await fetch(`https://bible-api.com/${specificRef}?translation=web`);
-    const data = await res.json();
-    
-    if (data.verses) {
-      const formattedText = data.verses.map(v => {
-        return `<span style="color: var(--secondary); font-size: 0.8rem; font-weight: bold; margin-right: 4px;">${v.verse}</span>${v.text}`;
-      }).join(' ');
-      
-      modalBody.innerHTML = `<div style="text-align:left; font-family:serif; font-size:1.1rem; line-height:1.7;">${formattedText}</div>`;
+      // Open the modal immediately and show loading state
+      modal.style.display = 'block';
+      document.getElementById('modal-ref').innerText = specificRef;
+      modalBody.innerHTML = "<p style='text-align:center; font-family:sans-serif; color:var(--neutral);'>📜 Unrolling the scroll...</p>";
+
+      try {
+        const res = await fetch(`https://bible-api.com/${specificRef}?translation=web`);
+        const data = await res.json();
+
+        if (data.verses && data.verses.length > 0) {
+          // Formats each verse with a distinct superscript-style number
+          const formattedText = data.verses.map(v => {
+            return `<span style="color: var(--secondary); font-size: 0.9rem; font-weight: bold; margin-right: 6px; vertical-align: super;">${v.verse}</span>${v.text}`;
+          }).join(' ');
+
+          // The Readability Wrapper: 
+          // 1.3rem (~20pt) size, Georgia/Serif font, and 1.6 line-height for mobile clarity
+          modalBody.innerHTML = `
+        <div style="
+          text-align: left; 
+          font-family: 'Georgia', serif; 
+          font-size: 1.3rem; 
+          line-height: 1.6; 
+          color: #222; 
+          padding: 10px 5px;
+          letter-spacing: 0.01rem;
+        ">
+          ${formattedText}
+        </div>`;
+        } else {
+          modalBody.innerHTML = "<p style='text-align:center;'>Reference not found. Please check the Waypoint data.</p>";
+        }
+      } catch (e) {
+        modalBody.innerHTML = "<p style='text-align:center;'>Trail blocked. Check your connection to the Ranger Station (internet).</p>";
+      }
     }
-  } catch (e) {
-    modalBody.innerHTML = "Trail blocked. Check connection.";
-  }
-}
 
     function closeBibleModal() { document.getElementById('bibleModal').style.display = 'none'; }
     window.onload = () => { showView('home'); };
+
+    // Initial load of prayers from storage
+    let prayers = JSON.parse(localStorage.getItem('basecamp_prayers') || '[]');
+
+    function addPrayer() {
+      const input = document.getElementById('prayer-input');
+      if (input.value.trim() === "") return;
+
+      const newPrayer = {
+        id: Date.now(),
+        text: input.value,
+        answered: false,
+        date: new Date().toLocaleDateString()
+      };
+
+      prayers.unshift(newPrayer); // Add to top of list
+      input.value = "";
+      saveAndRender();
+    }
+
+    function toggleAnswered(id) {
+      prayers = prayers.map(p => {
+        if (p.id === id) p.answered = !p.answered;
+        return p;
+      });
+      saveAndRender();
+    }
+
+    function deletePrayer(id) {
+      if (confirm("Remove this entry from the log?")) {
+        prayers = prayers.filter(p => p.id !== id);
+        saveAndRender();
+      }
+    }
+
+    function saveAndRender() {
+      localStorage.setItem('basecamp_prayers', JSON.stringify(prayers));
+      renderPrayers();
+    }
+
+    function renderPrayers() {
+      const container = document.getElementById('prayer-list-container');
+      container.innerHTML = "";
+
+      if (prayers.length === 0) {
+        container.innerHTML = "<p style='color:var(--neutral); opacity:0.6;'>Your journal is empty. Add your first request above.</p>";
+        return;
+      }
+
+      prayers.forEach(p => {
+        const card = document.createElement('div');
+        card.className = "card";
+
+        // Apply Gold Styling if Answered
+        if (p.answered) {
+          card.style.border = "2px solid var(--accent)";
+          card.style.background = "#FFF9E6"; // Soft gold wash
+        }
+
+        card.innerHTML = `
+      <div style="text-align: left;">
+        <small style="color: var(--neutral); opacity: 0.7;">${p.date}</small>
+        <p style="font-size: 1.1rem; font-weight: 700; margin: 8px 0; color: ${p.answered ? '#B8860B' : 'var(--primary)'};">
+          ${p.answered ? '⭐ ' : ''}${p.text}
+        </p>
+        <div style="display: flex; gap: 10px; margin-top: 10px;">
+          <button onclick="toggleAnswered(${p.id})" style="flex: 2; padding: 8px; font-size: 0.7rem; border-radius: 4px; border: 1px solid var(--primary); background: ${p.answered ? 'var(--accent)' : 'white'}; font-family: 'Archivo Black';">
+            ${p.answered ? 'ANSWERED' : 'MARK ANSWERED'}
+          </button>
+          <button onclick="deletePrayer(${p.id})" style="flex: 1; padding: 8px; font-size: 0.7rem; background: #eee; border: 1px solid #ccc; border-radius: 4px;">🗑️</button>
+        </div>
+      </div>
+    `;
+        container.appendChild(card);
+      });
+    }
+
+    // Function to check if a specific waypoint is 100% complete
+    function isWaypointComplete(idx) {
+      const saved = JSON.parse(localStorage.getItem(`basecamp_w${idx}`) || '{}');
+      // Check if all 4 mission requirements are true
+      return (saved.v && saved.b && saved.s && saved.m);
+    }
+
+    function renderPassport() {
+      const grid = document.getElementById('passport-grid');
+      grid.innerHTML = "";
+
+      lessons.forEach((lesson, idx) => {
+        const slot = document.createElement('div');
+        slot.className = "stamp-slot";
+
+        if (isWaypointComplete(idx)) {
+          slot.classList.add('stamp-active');
+          slot.innerHTML = `
+        <div class="stamp-text">
+          <div style="font-size: 3rem;">⛰️</div>
+          WAYPOINT<br>${idx + 1}
+        </div>`;
+        } else {
+          slot.innerHTML = `<span style="color:#ccc; font-size:3rem;">${idx + 1}</span>`;
+        }
+        grid.appendChild(slot);
+      });
+    }
   </script>
 </body>
 
